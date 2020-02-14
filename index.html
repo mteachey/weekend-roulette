@@ -10,12 +10,23 @@
     <body>
         <h1>Let's Get You Something To Do!</h1>
         <form id="event-form">
-            <label for="state-name">State or States (abbreviation)</label>
-            <input type="text" name="state-name" id="state-name" placeholder="CO,VA" required>
-            <p class="input-notes">If you would like to search for more then one state, please separate your state abbreviations by a comma and no spaces</p>
-            <label for="max-results">Max Results</label>
-            <input type="number" name="max-results" id="max-results" value="10">
-            <button type="submit">Get Your Parks</button>
+            <fieldset name="day-activities">
+                <legend>Day Activities</legend>
+                <label for="radius-day">Radius (mi)</label>
+                <input type="number" name="radius-day" id="radius-day" placeholder="10">
+                <label for="min-length">Min Length (mi)</label>
+                <input type="number" name="min-length" id="min-length" placeholder="0">
+                <label for="hiking">Hiking</label>
+                <input type="checkbox" id="hiking" name="hiking" value="yes" checked><br>
+                <label for="vehicle2">Mountain Biking</label>
+                <input type="checkbox" id="mountain-biking" name="mountain-biking" value="yes" checked>               
+            </fieldset>
+            <fieldset name="night-activities">
+                <legend>Night Activities</legend>
+                <label for="radius-night">Radius (mi)</label>
+                <input type="number" name="radius-night" id="radius-night" placeholder="10">
+            </fieldset>           
+            <button type="submit">Roll the Dice</button>
         </form>
         <p id="js-error-message" class="error-message"></p>
         <section class="results js-hidden">

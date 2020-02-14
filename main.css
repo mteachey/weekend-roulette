@@ -39,6 +39,10 @@ input{
     width:250px;
 }
 
+input[type=checkbox]{
+    width:25px;
+}
+
 label {
     font-size: 1.25rem;
     margin-top:0;

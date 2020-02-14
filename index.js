@@ -16,6 +16,9 @@ const lat = 40.0274;
 const lon = -105.2519;
 //remove once set up getlatLong
 
+//input vars//
+//radius-day, min-length,hiking(yes), mountain-biking(yes),
+
 const hikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
 const bikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
 const restaurantHeader = 'user-key:e5800b1de7b26545fe07ad6a49160396';
