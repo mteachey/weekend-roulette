@@ -11,6 +11,21 @@
     //then render/display these results plus a start over button, home button, learn more button
 //
 
+//Going to start with a const latLong then add the user input and api call 
+const lat = 40.0274;
+const lon = -105.2519;
+//remove once set up getlatLong
+
+const hikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
+const bikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
+const restaurantHeader = 'user-key:e5800b1de7b26545fe07ad6a49160396';
+const latLongKey = '6c790e07e8a9409b98ba70f8cbde2eab';
+
+const hikeUrl = 'https://www.hikingproject.com/data/get-trails';
+const bikeUrl = 'https://www.mtbproject.com/data/get-trails';
+const restaurantUrl = 'https://developers.zomato.com/api/v2.1/search';
+const latLongUrl = 'https://api.opencagedata.com/geocode/v1/json';
+
 function pickResultsDay(){
  //this function will take in the results from the day apis and then select 2 random options out of those results to returned   
     console.log(`pickResults ran`);
