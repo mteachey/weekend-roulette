@@ -32,37 +32,29 @@ const latLongEndPoint = 'https://api.opencagedata.com/geocode/v1/json';
 let dayActivity = [];
 
 
-function resultsHiking(responseJsonHiking){
-    const numberOfResults = responseJsonHiking.trails.length;
-    const firstTrailNumber = Math.floor(Math.random() * (numberOfResults+1));     
-    const secondTrailNumber = Math.floor(Math.random() * (numberOfResults+1));
+function resultsHikingBiking(responseJson){
+    let numberOfResults = responseJson.trails.length;
+    let firstTrailNumber = Math.floor(Math.random() * (numberOfResults+1));     
+    let secondTrailNumber = Math.floor(Math.random() * (numberOfResults+1));
     
-    dayActivity.push(responseJsonHiking.trails[firstTrailNumber]);
-    dayActivity.push(responseJsonHiking.trails[secondTrailNumber]);
+    dayActivity.push(responseJson.trails[firstTrailNumber]);
+    dayActivity.push(responseJson.trails[secondTrailNumber]);
     
-    console.log(firstTrailNumber);
-    console.log(`numberOfResults is ${numberOfResults}`);
-    
-    console.log(`this is the first trail ${responseJsonHiking.trails[firstTrailNumber].name}`)
-    console.log(`this is the dayActivity array ${dayActivity[0].name} and ${dayActivity[1].name}`);
+    //console.log(firstTrailNumber);
+    //console.log(`numberOfResults is ${numberOfResults}`);
+    //console.log(`this is the dayActivity array ${dayActivity[0].name}, ${dayActivity[1].name}, ${dayActivity[2].name}, ${dayActivity[3].name}`);
     console.log(`resultsHiking ran`);
+    let dayActivityOneNumber = Math.floor(Math.random() * 5);
+    let dayActivityTwoNumber = Math.floor(Math.random() * 5);
+    console.log(dayActivity[dayActivityOneNumber], dayActivity[dayActivityTwoNumber] )
+    displayDayResults(dayActivity[dayActivityOneNumber], dayActivity[dayActivityTwoNumber] );
 }
 
 
-function pickResultsDay(){
- //this function will take in the results from the day apis and then select 2 random options out of those results to returned   
-    console.log(`pickResults ran`);
-}
-
-function pickResultsEvening(){
-//this function will take in the results from the evening apis and then select 2 random options out of those results to returned   
-       console.log(`pickResults ran`);
-   }
-
-function displayResults(){
+function displayDayResults(activity1,activity2){
 //this function will call the pickResults functions which will select 2 random options out of the results returned by the api(s)
 //this function will render/display these results plus a start over button, home button, learn more button    
-    console.log(`displayResultsRan`);
+    console.log(`displayDayResultsRan`);
 }
 
 function formatParameters(params){
@@ -84,8 +76,35 @@ function getRestaurants(){
     console.log(`getRestaurants ran`);
 }
 
-function getBikes(){
-    console.log(`getBikes ran`);
+function getBikes(radiusDay=20,length=0){
+    const params= {
+        lat: latitude,
+        lon: longitude,
+        maxDistance:radiusDay,
+        minLength: length,
+        maxResults:'100',
+        key: bikeKey,   
+        };
+    const url = `${bikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${bikeKey}`;
+    console.log(`hike url ${url}`);
+
+   fetch(url)
+     .then(response=>{
+        if(response.ok){
+            return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(responseJson=>{
+         console.log(`bike called worked`);
+         //console.log(responseJsonHiking);
+         resultsHikingBiking(responseJson);
+      })
+      .catch(err => {
+        $('#js-error-message').text(`Something went wrong. Try again in a bit`)
+     });
+     
+   console.log(`getBikes ran`);
 }
 
 function getHikes(radiusDay=20,length=0){
@@ -107,9 +126,9 @@ function getHikes(radiusDay=20,length=0){
         }
         throw new Error(response.statusText);
       })
-      .then(responseJsonHiking=>{
+      .then(responseJson=>{
          console.log(`hike called worked`);
-         resultsHiking(responseJsonHiking);
+         resultsHikingBiking(responseJson);
       })
       .catch(err => {
         $('#js-error-message').text(`Something went wrong. Try again in a bit`)
@@ -123,10 +142,10 @@ function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
  //call all of the individual API functions
  //getLatLong();
  //getRestaurants();
- //getBikes();
  //call getHikes only if hiking is checked
- if(hiking==='yes'){
- getHikes(radiusDay,length);}
+ if(mtnbiking==='yes'){getBikes(radiusDay,length)};
+ //call getHikes only if hiking is checked
+ if(hiking==='yes'){getHikes(radiusDay,length);}
 
 //then call the displayResults function   
     console.log(`callAPIs ran`);
