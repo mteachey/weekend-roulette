@@ -62,6 +62,8 @@ function resultsRestaurant(results){
     let restaurantPickOne = Math.floor(Math.random() * (21));
     let restaurantPickTwo = Math.floor(Math.random() * (21));
     //console.log(`pick ${restaurantPick}`);
+    console.log(`pick number ${restaurantPickOne}`);
+    console.log(`pick number ${restaurantPickTwo}`);
     console.log(`this is a restaurant ${results.restaurants[restaurantPickOne].restaurant.name}`);
     console.log(`this is a restaurant ${results.restaurants[restaurantPickTwo].restaurant.name}`);
     let nightWinners = [];
@@ -100,12 +102,15 @@ function displayNightResults(nightWinners){
       $('.results-night').append(`<ul class="night-list"></ul>`);
       //console.log(dayWinners[0].name);
      for(let i=0; i < nightWinners.length; i++){
-        $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.name}</li>`);
-    // $('.day-list').append(`<li class="night-list-item">${nightWinners[i].category}</li>`);
-        //$('.day-list').append(`<li class="night-list-item">${nightWinners[i].summary}</li>`);
-      //  $('.day-list').append(`<li class="night-list-item">${nightWinners[i].difficulty}</li>`);
-        //$('.day-list').append(`<li class="night-list-item">${nightWinners[i]['length']}</li>`);
-        
+      $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.name}</li>`);
+      $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.url}</li>`);
+      $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.location.address}</li>`);
+      $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.location.city}</li>`);
+      $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.location.zipcode}</li>`);
+      $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.cuisines}</li>`);
+      $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.average_cost_for_two}</li>`);
+      $('.night-list').append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);
+       
      }//end of for loop
         console.log(`displayNightResultsRan`);
     }
@@ -118,9 +123,34 @@ const queryitems = Object.keys(params).map(key=>`${encodeURIComponent(key)}=${en
 return queryitems.join('&');    
 }
 
+function formatLatLong(locationResult){
+    const lat = locationResult.geometry.lat;
+    const long = locationResult.geometry.lng;
+    console.log(`is this the lat : ${locationResult.geometry.lat}`);
+    console.log(`is this the lat : ${locationResult.geometry.lng}`);
+    
+}
+
+
 //API functions
  //each individual function will combine the parameters with the correct api url and then call the api using fetch; throwing an error for no reponse and catching errors with error message
 function getLatLong(){
+    const city = 'Norfolk'; //eventually these will be form another form submit
+    const state = 'VA';
+    
+    const url = `${latLongEndPoint}?key=${latLongKey}&q=${city}+${state}&pretty=1`;
+    //https://api.opencagedata.com/geocode/v1/json?key=6c790e07e8a9409b98ba70f8cbde2eab&q=Denver+Colorado&pretty=1
+    console.log(url);
+
+    fetch(url)
+    .then(response=>{
+        return response.json();
+    })
+    .then(responseJson=>{
+        console.log(`latlong api ran`);
+        console.log(responseJson);
+        formatLatLong(responseJson.results[0]);
+    })
     console.log(`getLatLong ran`);
 }
 
@@ -263,8 +293,8 @@ function getTwentyRandomRestaurant(startNumber){
 
 function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
  //call all of the individual API functions
- //getLatLong();
- getAllRestaurants();
+ getLatLong();
+ //getAllRestaurants();
 
  /*
  //call getHikes and getBikes if checked and only call PickActivities for one of them)(timing??)

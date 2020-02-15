@@ -64,7 +64,7 @@ button {
     text-align: left;
 }
 
-.results-list {
+.night-list, .day-list {
     list-style-type: none;
     margin-block-start: 0em;
     margin-block-end: 0em;
@@ -84,4 +84,9 @@ button {
 
 .js-hidden{
     display:none;
+}
+
+.night-list img{
+    width:250px;
+    height:auto;
 }
