@@ -31,14 +31,11 @@ const latLongEndPoint = 'https://api.opencagedata.com/geocode/v1/json';
 
 let dayActivity = [];
 
-
 function resultsHikingOrBiking(responseJson,pick){
     let numberOfResults = responseJson.trails.length;
-    let firstTrailNumber = Math.floor(Math.random() * (numberOfResults+1));     
-    let secondTrailNumber = Math.floor(Math.random() * (numberOfResults+1));
-    
-    dayActivity.push(responseJson.trails[firstTrailNumber]);
-    dayActivity.push(responseJson.trails[secondTrailNumber]);
+    for (let i=0; i<numberOfResults; i++ ){
+       dayActivity.push(responseJson.trails[i]);
+    }
     console.log(`this is after Results Ran ${dayActivity.length}`);
     //only runs pickDayActivities when appropriate depending on if both hiking/biking checked
     if (pick)
@@ -53,11 +50,11 @@ function resultsHikingOrBiking(responseJson,pick){
 function pickDayActivities(dayActivity){
     let dayActivityOneNumber = Math.floor(Math.random() * (dayActivity.length+1));
     let dayActivityTwoNumber = Math.floor(Math.random() * (dayActivity.length+1));
-    console.log(`this is the act ${dayActivity[dayActivityOneNumber]}, ${dayActivity[dayActivityTwoNumber]}`);
+    //console.log(`this is the act ${dayActivity[dayActivityOneNumber]}, ${dayActivity[dayActivityTwoNumber]}`);
     let dayWinners =[];
     dayWinners = [dayActivity[dayActivityOneNumber],dayActivity[dayActivityTwoNumber]];
-    console.log(`the length ${dayWinners.length}`);
-    console.log(`this is the first activity ${dayWinners[0].name} 2nd ${dayWinners[1].name}`);
+   // console.log(`the length ${dayWinners.length}`);
+    //console.log(`this is the first activity ${dayWinners[0].name} 2nd ${dayWinners[1].name}`);
     displayDayResults(dayWinners);
 }
 
@@ -71,11 +68,9 @@ function displayDayResults(dayWinners){
   $('.results-day').append(`<ul class="day-list"></ul>`);
   //console.log(dayWinners[0].name);
  for(let i=0; i < dayWinners.length; i++){
-    //$('.day-list').append(`<li class="day-list-item">${dayWinners[0].name}</li>`);
-   // $('.day-list').append(`<li class="day-list-item">${dayWinners[0].type}</li>`);
     $('.day-list').append(`<li class="day-list-item">${dayWinners[i].name}</li>`);
     $('.day-list').append(`<li class="day-list-item">${dayWinners[i].type}</li>`);
-    //$('.day-list').append(`<li class="day-list">${dayWinners[0].summary}</li>`);
+    
  }//end of for loop
     console.log(`displayDayResultsRan`);
 }
@@ -129,7 +124,7 @@ function getBikes(radiusDay=20,length=0, hikingAlso){
          
       })
       .catch(err => {
-        $('#js-error-message').text(`Something went wrong. Try again in a bit`)
+        $('#js-error-message').text(`Sorry, I may be out hiking. Try again`)
      });
      
    console.log(`getBikes ran`);
