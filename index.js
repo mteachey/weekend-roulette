@@ -36,11 +36,11 @@ function resultsHikingOrBiking(responseJson,pick){
     for (let i=0; i<numberOfResults; i++ ){
        dayActivity.push(responseJson.trails[i]);
     }
-    console.log(`this is after Results Ran ${dayActivity.length}`);
+   // console.log(`this is after Results Ran ${dayActivity.length}`);
     //only runs pickDayActivities when appropriate depending on if both hiking/biking checked
     if (pick)
     {
-         console.log(`this is if pick worked ${dayActivity.length}`);
+        // console.log(`this is if pick worked ${dayActivity.length}`);
          pickDayActivities(dayActivity);
     }
     console.log(`resultsHiking ran`);
@@ -102,7 +102,7 @@ function getBikes(radiusDay=20,length=0, hikingAlso){
         key: bikeKey,   
         };
     const url = `${bikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${bikeKey}`;
-    console.log(`bike url ${url}`);
+    //console.log(`bike url ${url}`);
 
    fetch(url)
      .then(response=>{
@@ -142,12 +142,12 @@ function getHikes(radiusDay=20,length=0, bikeAlso){
         key: hikeKey,   
         };
     const url = `${hikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${hikeKey}`;
-    console.log(`hike url ${url}`);
+   // console.log(`hike url ${url}`);
 
    fetch(url)
      .then(response=>{
         if(response.ok){
-            //console.log(response);
+            console.log(response);
             return response.json();
         }
         throw new Error(response.statusText);
@@ -229,8 +229,8 @@ function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
     }
  else if(mtnbiking==='no' && hiking==='yes' ){
     getHikes(radiusDay,length, false)
- }
-*/
+ }*/
+
 //then call the displayResults function   
     console.log(`callAPIs ran`);
 }
