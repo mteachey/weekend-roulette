@@ -32,28 +32,51 @@ const latLongEndPoint = 'https://api.opencagedata.com/geocode/v1/json';
 let dayActivity = [];
 
 
-function resultsHikingBiking(responseJson){
+function resultsHikingOrBiking(responseJson,pick){
     let numberOfResults = responseJson.trails.length;
     let firstTrailNumber = Math.floor(Math.random() * (numberOfResults+1));     
     let secondTrailNumber = Math.floor(Math.random() * (numberOfResults+1));
     
     dayActivity.push(responseJson.trails[firstTrailNumber]);
     dayActivity.push(responseJson.trails[secondTrailNumber]);
-    
-    //console.log(firstTrailNumber);
-    //console.log(`numberOfResults is ${numberOfResults}`);
-    //console.log(`this is the dayActivity array ${dayActivity[0].name}, ${dayActivity[1].name}, ${dayActivity[2].name}, ${dayActivity[3].name}`);
+    console.log(`this is after Results Ran ${dayActivity.length}`);
+    //only runs pickDayActivities when appropriate depending on if both hiking/biking checked
+    if (pick)
+    {
+         console.log(`this is if pick worked ${dayActivity.length}`);
+         pickDayActivities(dayActivity);
+    }
     console.log(`resultsHiking ran`);
-    let dayActivityOneNumber = Math.floor(Math.random() * 5);
-    let dayActivityTwoNumber = Math.floor(Math.random() * 5);
-    console.log(dayActivity[dayActivityOneNumber], dayActivity[dayActivityTwoNumber] )
-    displayDayResults(dayActivity[dayActivityOneNumber], dayActivity[dayActivityTwoNumber] );
+    
 }
 
+function pickDayActivities(dayActivity){
+    let dayActivityOneNumber = Math.floor(Math.random() * (dayActivity.length+1));
+    let dayActivityTwoNumber = Math.floor(Math.random() * (dayActivity.length+1));
+    console.log(`this is the act ${dayActivity[dayActivityOneNumber]}, ${dayActivity[dayActivityTwoNumber]}`);
+    let dayWinners =[];
+    dayWinners = [dayActivity[dayActivityOneNumber],dayActivity[dayActivityTwoNumber]];
+    console.log(`the length ${dayWinners.length}`);
+    console.log(`this is the first activity ${dayWinners[0].name} 2nd ${dayWinners[1].name}`);
+    displayDayResults(dayWinners);
+}
 
-function displayDayResults(activity1,activity2){
+function displayDayResults(dayWinners){
 //this function will call the pickResults functions which will select 2 random options out of the results returned by the api(s)
-//this function will render/display these results plus a start over button, home button, learn more button    
+//this function will render/display these results plus a start over button, home button, learn more button 
+  $('.results').removeClass('js-hidden');   
+  $('.results-header').removeClass('js-hidden'); 
+  $('.results-day').removeClass('js-hidden'); 
+  $('.results-day').empty()
+  $('.results-day').append(`<ul class="day-list"></ul>`);
+  //console.log(dayWinners[0].name);
+ for(let i=0; i < dayWinners.length; i++){
+    //$('.day-list').append(`<li class="day-list-item">${dayWinners[0].name}</li>`);
+   // $('.day-list').append(`<li class="day-list-item">${dayWinners[0].type}</li>`);
+    $('.day-list').append(`<li class="day-list-item">${dayWinners[i].name}</li>`);
+    $('.day-list').append(`<li class="day-list-item">${dayWinners[i].type}</li>`);
+    //$('.day-list').append(`<li class="day-list">${dayWinners[0].summary}</li>`);
+ }//end of for loop
     console.log(`displayDayResultsRan`);
 }
 
@@ -76,7 +99,7 @@ function getRestaurants(){
     console.log(`getRestaurants ran`);
 }
 
-function getBikes(radiusDay=20,length=0){
+function getBikes(radiusDay=20,length=0, hikingAlso){
     const params= {
         lat: latitude,
         lon: longitude,
@@ -86,7 +109,7 @@ function getBikes(radiusDay=20,length=0){
         key: bikeKey,   
         };
     const url = `${bikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${bikeKey}`;
-    console.log(`hike url ${url}`);
+    console.log(`bike url ${url}`);
 
    fetch(url)
      .then(response=>{
@@ -98,7 +121,12 @@ function getBikes(radiusDay=20,length=0){
       .then(responseJson=>{
          console.log(`bike called worked`);
          //console.log(responseJsonHiking);
-         resultsHikingBiking(responseJson);
+         if(hikingAlso){
+            resultsHikingOrBiking(responseJson, false); 
+            getHikes(radiusDay,length, true);
+         }
+         else{resultsHikingOrBiking(responseJson, true);}
+         
       })
       .catch(err => {
         $('#js-error-message').text(`Something went wrong. Try again in a bit`)
@@ -107,7 +135,7 @@ function getBikes(radiusDay=20,length=0){
    console.log(`getBikes ran`);
 }
 
-function getHikes(radiusDay=20,length=0){
+function getHikes(radiusDay=20,length=0, bikeAlso){
     const params= {
         lat: latitude,
         lon: longitude,
@@ -128,7 +156,7 @@ function getHikes(radiusDay=20,length=0){
       })
       .then(responseJson=>{
          console.log(`hike called worked`);
-         resultsHikingBiking(responseJson);
+         resultsHikingOrBiking(responseJson, true)
       })
       .catch(err => {
         $('#js-error-message').text(`Something went wrong. Try again in a bit`)
@@ -142,10 +170,16 @@ function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
  //call all of the individual API functions
  //getLatLong();
  //getRestaurants();
- //call getHikes only if hiking is checked
- if(mtnbiking==='yes'){getBikes(radiusDay,length)};
- //call getHikes only if hiking is checked
- if(hiking==='yes'){getHikes(radiusDay,length);}
+ //call getHikes and getBikes if checked and only call PickActivities for one of them)(timing??)
+ if(mtnbiking==='yes' && hiking==='yes'){
+     getBikes(radiusDay,length, true);
+    }
+ else if(mtnbiking==='yes' && hiking==='no'){
+     getBikes(radiusDay,length, false)
+    }
+ else if(mtnbiking==='no' && hiking==='yes' ){
+    getHikes(radiusDay,length, false)
+ }
 
 //then call the displayResults function   
     console.log(`callAPIs ran`);
@@ -160,6 +194,7 @@ function watchFormSubmit(){
 //call the function to format the parameters and header of the api calls
 $('#event-form').submit(function(event){
     event.preventDefault();
+    $('#js-error-message').empty();
     let radiusDay = $('#radius-day').val();
     let length = $('#min-length').val();
     let hiking = $('#hiking').is(':checked')?'yes':'no';
