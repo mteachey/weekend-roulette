@@ -69,7 +69,10 @@ function displayDayResults(dayWinners){
   //console.log(dayWinners[0].name);
  for(let i=0; i < dayWinners.length; i++){
     $('.day-list').append(`<li class="day-list-item">${dayWinners[i].name}</li>`);
-    $('.day-list').append(`<li class="day-list-item">${dayWinners[i].type}</li>`);
+    $('.day-list').append(`<li class="day-list-item">${dayWinners[i].category}</li>`);
+    $('.day-list').append(`<li class="day-list-item">${dayWinners[i].summary}</li>`);
+    $('.day-list').append(`<li class="day-list-item">${dayWinners[i].difficulty}</li>`);
+    $('.day-list').append(`<li class="day-list-item">${dayWinners[i]['length']}</li>`);
     
  }//end of for loop
     console.log(`displayDayResultsRan`);
@@ -116,6 +119,10 @@ function getBikes(radiusDay=20,length=0, hikingAlso){
       .then(responseJson=>{
          console.log(`bike called worked`);
          //console.log(responseJsonHiking);
+         let numberOfResults = responseJson.trails.length;
+         for (let i=0; i<numberOfResults; i++ ){
+             responseJson.trails[i].category = 'bike';
+         }
          if(hikingAlso){
             resultsHikingOrBiking(responseJson, false); 
             getHikes(radiusDay,length, true);
@@ -150,6 +157,10 @@ function getHikes(radiusDay=20,length=0, bikeAlso){
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
+        let numberOfResults = responseJson.trails.length;
+        for (let i=0; i<numberOfResults; i++ ){
+            responseJson.trails[i].category = 'hike';
+        }
          console.log(`hike called worked`);
          resultsHikingOrBiking(responseJson, true)
       })
