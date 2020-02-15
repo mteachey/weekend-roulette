@@ -58,6 +58,18 @@ function pickDayActivities(dayActivity){
     displayDayResults(dayWinners);
 }
 
+function resultsRestaurant(results){
+    let restaurantPickOne = Math.floor(Math.random() * (21));
+    let restaurantPickTwo = Math.floor(Math.random() * (21));
+    //console.log(`pick ${restaurantPick}`);
+    console.log(`this is a restaurant ${results.restaurants[restaurantPickOne].restaurant.name}`);
+    console.log(`this is a restaurant ${results.restaurants[restaurantPickTwo].restaurant.name}`);
+    let nightWinners = [];
+    nightWinners = [results.restaurants[restaurantPickOne],results.restaurants[restaurantPickTwo]];
+    displayNightResults(nightWinners);
+    console.log(`resultsRestaurant ran`);
+}
+
 function displayDayResults(dayWinners){
 //this function will call the pickResults functions which will select 2 random options out of the results returned by the api(s)
 //this function will render/display these results plus a start over button, home button, learn more button 
@@ -77,6 +89,26 @@ function displayDayResults(dayWinners){
  }//end of for loop
     console.log(`displayDayResultsRan`);
 }
+
+function displayNightResults(nightWinners){
+    //this function will call the pickResults functions which will select 2 random options out of the results returned by the api(s)
+    //this function will render/display these results plus a start over button, home button, learn more button 
+      $('.results').removeClass('js-hidden');   
+      $('.results-header').removeClass('js-hidden'); 
+      $('.results-night').removeClass('js-hidden'); 
+      $('.results-night').empty()
+      $('.results-night').append(`<ul class="night-list"></ul>`);
+      //console.log(dayWinners[0].name);
+     for(let i=0; i < nightWinners.length; i++){
+        $('.night-list').append(`<li class="night-list-item">${nightWinners[i].restaurant.name}</li>`);
+    // $('.day-list').append(`<li class="night-list-item">${nightWinners[i].category}</li>`);
+        //$('.day-list').append(`<li class="night-list-item">${nightWinners[i].summary}</li>`);
+      //  $('.day-list').append(`<li class="night-list-item">${nightWinners[i].difficulty}</li>`);
+        //$('.day-list').append(`<li class="night-list-item">${nightWinners[i]['length']}</li>`);
+        
+     }//end of for loop
+        console.log(`displayNightResultsRan`);
+    }
 
 function formatParameters(params){
 //take in input from forms; lat/long and format parameters and headers (if necessary) for each API
@@ -167,34 +199,10 @@ function getHikes(radiusDay=20,length=0, bikeAlso){
     console.log(`getHikes ran`);
 }
 
-/*function getRestaurants(radiusNight){
+function getAllRestaurants(){
     
     const url = `${restaurantEndPoint}?lat=${latitude}&lon=${longitude}`;
-    console.log(url);
-    const options = {
-        headers: new Headers(
-        {"user-key":"e5800b1de7b26545fe07ad6a49160396",})
-      };
-
-      fetch(url, options)
-      .then(response =>{
-          if(response.ok){
-              response.json();
-          }
-          throw new Error(response.statusText);
-      })
-      .then(responseJson=>{
-          console.log('restaurant call worked');
-      })
-
-      
-    console.log(`getRestaurants ran`);
-}*/
-
-function getRestaurants(radiusNight){
-    
-    //const url = `${restaurantEndPoint}?lat=${latitude}&lon=${longitude}`;
-    const url = "https://developers.zomato.com/api/v2.1/categories";
+   // const url = "https://developers.zomato.com/api/v2.1/categories";
     console.log(url);
     const options = {
         headers: new Headers(
@@ -202,13 +210,52 @@ function getRestaurants(radiusNight){
       };
       fetch(url, options)
       .then(response =>{    
-              console.log(response);     
-              response.json();
+              //console.log(response);     
+              return response.json(); 
           }
          )
       .then(responseJson=>{
           console.log('restaurant call worked');
-          console.log(responseJson);
+          console.log(`this is the number of results ${responseJson.results_found}`);
+          getRandomStart(responseJson);
+          //console.log(responseJson);         
+      })      
+    console.log(`getRestaurants ran`);
+}
+
+function getRandomStart(responseJson){
+    let numberOfResults = responseJson.results_found;
+    //the API will not let the start be greater than 80
+    if(numberOfResults > 80){
+        numberOfResults = 80;
+    }
+    let randomStartOfResultsShown = Math.floor(Math.random() * (numberOfResults+1));
+    console.log(`this is the start ${randomStartOfResultsShown}`);
+    getTwentyRandomRestaurant(randomStartOfResultsShown);
+}
+
+function getTwentyRandomRestaurant(startNumber){
+    
+    const url = `${restaurantEndPoint}?lat=${latitude}&lon=${longitude}&start=${startNumber}`;
+   // const url = "https://developers.zomato.com/api/v2.1/categories";
+    console.log(url);
+    const options = {
+        headers: new Headers(
+        {"user-key":"e5800b1de7b26545fe07ad6a49160396",})
+      };
+      fetch(url, options)
+      .then(response =>{    
+              //console.log(response);     
+              return response.json(); 
+          }
+         )
+      .then(responseJson=>{
+          console.log('2nd restaurant call worked');
+          console.log(`this is the number of results ${responseJson.results_found}`)
+         // let randomStartOfResultsShown = Math.floor(Math.random() * (responseJson.results_found));
+         // getTwentyRandomRestaurant(randomStartOfResultsShown);
+          //console.log(responseJson);   
+          resultsRestaurant(responseJson);    
       })      
     console.log(`getRestaurants ran`);
 }
@@ -217,7 +264,7 @@ function getRestaurants(radiusNight){
 function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
  //call all of the individual API functions
  //getLatLong();
- getRestaurants(radiusNight);
+ getAllRestaurants();
 
  /*
  //call getHikes and getBikes if checked and only call PickActivities for one of them)(timing??)
