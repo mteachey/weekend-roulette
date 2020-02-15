@@ -21,7 +21,7 @@ const longitude = -105.2519;
 
 const hikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
 const bikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
-const restaurantHeader = 'user-key:e5800b1de7b26545fe07ad6a49160396';
+const restaurantKey = 'e5800b1de7b26545fe07ad6a49160396';
 const latLongKey = '6c790e07e8a9409b98ba70f8cbde2eab';
 
 const hikeEndPoint = 'https://www.hikingproject.com/data/get-trails';
@@ -92,11 +92,6 @@ function getLatLong(){
     console.log(`getLatLong ran`);
 }
 
-function getRestaurants(){
-   
-    console.log(`getRestaurants ran`);
-}
-
 function getBikes(radiusDay=20,length=0, hikingAlso){
     const params= {
         lat: latitude,
@@ -152,6 +147,7 @@ function getHikes(radiusDay=20,length=0, bikeAlso){
    fetch(url)
      .then(response=>{
         if(response.ok){
+            //console.log(response);
             return response.json();
         }
         throw new Error(response.statusText);
@@ -171,11 +167,59 @@ function getHikes(radiusDay=20,length=0, bikeAlso){
     console.log(`getHikes ran`);
 }
 
+/*function getRestaurants(radiusNight){
+    
+    const url = `${restaurantEndPoint}?lat=${latitude}&lon=${longitude}`;
+    console.log(url);
+    const options = {
+        headers: new Headers(
+        {"user-key":"e5800b1de7b26545fe07ad6a49160396",})
+      };
+
+      fetch(url, options)
+      .then(response =>{
+          if(response.ok){
+              response.json();
+          }
+          throw new Error(response.statusText);
+      })
+      .then(responseJson=>{
+          console.log('restaurant call worked');
+      })
+
+      
+    console.log(`getRestaurants ran`);
+}*/
+
+function getRestaurants(radiusNight){
+    
+    //const url = `${restaurantEndPoint}?lat=${latitude}&lon=${longitude}`;
+    const url = "https://developers.zomato.com/api/v2.1/categories";
+    console.log(url);
+    const options = {
+        headers: new Headers(
+        {"user-key":"e5800b1de7b26545fe07ad6a49160396",})
+      };
+      fetch(url, options)
+      .then(response =>{    
+              console.log(response);     
+              response.json();
+          }
+         )
+      .then(responseJson=>{
+          console.log('restaurant call worked');
+          console.log(responseJson);
+      })      
+    console.log(`getRestaurants ran`);
+}
+
 
 function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
  //call all of the individual API functions
  //getLatLong();
- //getRestaurants();
+ getRestaurants(radiusNight);
+
+ /*
  //call getHikes and getBikes if checked and only call PickActivities for one of them)(timing??)
  if(mtnbiking==='yes' && hiking==='yes'){
      getBikes(radiusDay,length, true);
@@ -186,7 +230,7 @@ function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
  else if(mtnbiking==='no' && hiking==='yes' ){
     getHikes(radiusDay,length, false)
  }
-
+*/
 //then call the displayResults function   
     console.log(`callAPIs ran`);
 }
