@@ -12,8 +12,8 @@
 //
 
 //Going to start with a const latLong then add the user input and api call 
-const latitude = 40.0274;
-const longitude = -105.2519;
+let latitude = 40.0274;
+let longitude = -105.2519;
 //remove once set up getlatLong
 
 //input vars//
@@ -124,11 +124,12 @@ return queryitems.join('&');
 }
 
 function formatLatLong(locationResult){
-    const lat = locationResult.geometry.lat;
-    const long = locationResult.geometry.lng;
+    latitude = locationResult.geometry.lat;
+    longitude = locationResult.geometry.lng;
     console.log(`is this the lat : ${locationResult.geometry.lat}`);
     console.log(`is this the lat : ${locationResult.geometry.lng}`);
-    
+    console.log(latitude);
+   
 }
 
 
@@ -137,7 +138,7 @@ function formatLatLong(locationResult){
 function getLatLong(){
     const city = 'Norfolk'; //eventually these will be form another form submit
     const state = 'VA';
-    
+
     const url = `${latLongEndPoint}?key=${latLongKey}&q=${city}+${state}&pretty=1`;
     //https://api.opencagedata.com/geocode/v1/json?key=6c790e07e8a9409b98ba70f8cbde2eab&q=Denver+Colorado&pretty=1
     console.log(url);
@@ -194,7 +195,7 @@ function getBikes(radiusDay=20,length=0, hikingAlso){
    console.log(`getBikes ran`);
 }
 
-function getHikes(radiusDay=20,length=0, bikeAlso){
+function getHikes(radiusDay=10,length=0, bikeAlso){
     const params= {
         lat: latitude,
         lon: longitude,
@@ -203,6 +204,9 @@ function getHikes(radiusDay=20,length=0, bikeAlso){
         maxResults:'100',
         key: hikeKey,   
         };
+    if (radiusDay < 10){
+        radiusDay = 10;
+    }    
     const url = `${hikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${hikeKey}`;
    // console.log(`hike url ${url}`);
 
@@ -291,12 +295,11 @@ function getTwentyRandomRestaurant(startNumber){
 }
 
 
-function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
+function callAPIs(radiusDay,length, hiking,mtnbiking){
  //call all of the individual API functions
- getLatLong();
- //getAllRestaurants();
 
- /*
+ getAllRestaurants();
+
  //call getHikes and getBikes if checked and only call PickActivities for one of them)(timing??)
  if(mtnbiking==='yes' && hiking==='yes'){
      getBikes(radiusDay,length, true);
@@ -306,7 +309,7 @@ function callAPIs(radiusDay,length, hiking,mtnbiking,radiusNight){
     }
  else if(mtnbiking==='no' && hiking==='yes' ){
     getHikes(radiusDay,length, false)
- }*/
+ }
 
 //then call the displayResults function   
     console.log(`callAPIs ran`);
@@ -334,3 +337,4 @@ $('#event-form').submit(function(event){
 }
 
 $(watchFormSubmit);
+$(getLatLong);  //right now this runs onload - eventually will be from a submit on a previous screen
