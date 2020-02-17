@@ -136,9 +136,18 @@ return queryitems.join('&');
 function formatLatLong(locationResult){
     latitude = locationResult.geometry.lat;
     longitude = locationResult.geometry.lng;
+    
     console.log(`is this the lat : ${locationResult.geometry.lat}`);
     console.log(`is this the lat : ${locationResult.geometry.lng}`);
+    
+    displayNewForm();
     //console.log(latitude);   
+}
+
+function displayNewForm(){
+    $('#location-input').addClass('js-section-hidden');
+    $('#activities-input').removeClass('js-section-hidden');
+    console.log(`newForm ran`);
 }
 
 
@@ -147,7 +156,8 @@ function formatLatLong(locationResult){
 function getLatLong(cityInput, stateInput){
     const city = encodeURIComponent(cityInput); 
     const state = encodeURIComponent(stateInput);
-
+    console.log(`the inputs ${cityInput} ${stateInput}`);
+    
     const url = `${latLongEndPoint}?key=${latLongKey}&q=${city}+${state}&no_annotations&pretty=1`;
     
     console.log(url);
@@ -162,7 +172,7 @@ function getLatLong(cityInput, stateInput){
     })
     .then(responseJson=>{
         console.log(`latlong api ran`);
-       // console.log(responseJson);
+        console.log(responseJson.results[0]);
         formatLatLong(responseJson.results[0]);
     })
     .catch(err => {
@@ -399,7 +409,7 @@ function watchLatLongFormSubmit(){
      event.preventDefault();
      let city = $('#city').val();
      let state = $('#state').val();
-     
+     console.log(`the inputs ${city} ${state}`);
      getLatLong(city, state);
     });
     console.log(`watchLatLong ran`);
