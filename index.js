@@ -128,8 +128,7 @@ function formatLatLong(locationResult){
     longitude = locationResult.geometry.lng;
     console.log(`is this the lat : ${locationResult.geometry.lat}`);
     console.log(`is this the lat : ${locationResult.geometry.lng}`);
-    console.log(latitude);
-   
+    console.log(latitude);   
 }
 
 
@@ -178,24 +177,28 @@ function getBikes(radiusDay=20,length=0, hikingAlso){
          console.log(`bike called worked`);
          //console.log(responseJsonHiking);
          let numberOfResults = responseJson.trails.length;
-         for (let i=0; i<numberOfResults; i++ ){
-             responseJson.trails[i].category = 'bike';
+         if(numberOfResults < 2){
+            $('#js-error-message').text(`Sorry, it looks like we didn't find any bikes or hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes. `)
          }
-         if(hikingAlso){
-            resultsHikingOrBiking(responseJson, false); 
-            getHikes(radiusDay,length, true);
-         }
-         else{resultsHikingOrBiking(responseJson, true);}
-         
+         else{
+                for (let i=0; i<numberOfResults; i++ ){
+                    responseJson.trails[i].category = 'bike';
+                }
+                if(hikingAlso){
+                    resultsHikingOrBiking(responseJson, false); 
+                    getHikes(radiusDay,length, true);
+                }
+                else{resultsHikingOrBiking(responseJson, true);}
+         } //end if check numberOfResults
       })
       .catch(err => {
-        $('#js-error-message').text(`Sorry, I may be out hiking. Try again`)
+        $('#js-error-message').text(`Sorry, we may be out biking. Try again`)
      });
      
    console.log(`getBikes ran`);
 }
 
-function getHikes(radiusDay=10,length=0, bikeAlso){
+function getHikes(radiusDay=20,length=0, bikeAlso){
     const params= {
         lat: latitude,
         lon: longitude,
@@ -204,34 +207,42 @@ function getHikes(radiusDay=10,length=0, bikeAlso){
         maxResults:'100',
         key: hikeKey,   
         };
-    if (radiusDay < 10){
+    /*if (radiusDay < 10){
         radiusDay = 10;
-    }    
+    }    */
     const url = `${hikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${hikeKey}`;
    // console.log(`hike url ${url}`);
 
    fetch(url)
      .then(response=>{
+         
         if(response.ok){
-            console.log(response);
             return response.json();
         }
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
         let numberOfResults = responseJson.trails.length;
-        for (let i=0; i<numberOfResults; i++ ){
-            responseJson.trails[i].category = 'hike';
-        }
-         console.log(`hike called worked`);
-         resultsHikingOrBiking(responseJson, true)
+        if(numberOfResults < 2){
+            $('#js-error-message').text(`Sorry, it looks like we didn't find any hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck hikes. `)
+         }
+         else {
+            for (let i=0; i<numberOfResults; i++ ){
+                responseJson.trails[i].category = 'hike';
+            }
+            console.log(`hike called worked`);
+            console.log(`number of hikes : ${numberOfResults}`);
+            resultsHikingOrBiking(responseJson, true)
+        }//end of if for numberOfResults
       })
       .catch(err => {
-        $('#js-error-message').text(`Something went wrong. Try again in a bit`)
+        $('#js-error-message').text(`Sorry, we may be out hiking. Try again in a bit`)
      });
      
     console.log(`getHikes ran`);
 }
+
+
 
 function getAllRestaurants(){
     
@@ -243,17 +254,28 @@ function getAllRestaurants(){
         {"user-key":"e5800b1de7b26545fe07ad6a49160396",})
       };
       fetch(url, options)
-      .then(response =>{    
-              //console.log(response);     
-              return response.json(); 
-          }
-         )
+      .then(response =>{   
+        if(response.ok){
+            return response.json();
+        }
+        throw new Error(response.statusText);                 
+       })
       .then(responseJson=>{
+        let numberOfResults = responseJson.results_found;
+        if(numberOfResults < 2){
+            $('#js-error-message').text(`Sorry, it looks like we didn't find restaurants in your city.`)
+         }
+         else {
+
           console.log('restaurant call worked');
-          console.log(`this is the number of results ${responseJson.results_found}`);
+          console.log(`this is the number of restaurant results ${numberOfResults}`);
           getRandomStart(responseJson);
-          //console.log(responseJson);         
+          //console.log(responseJson); 
+         }//end numberOfResults if
       })      
+      .catch(err => {
+        $('#js-error-message').text(`Sorry, we may napping after a delicious meal. Try again in a bit`)
+     });
     console.log(`getRestaurants ran`);
 }
 
@@ -298,6 +320,7 @@ function getTwentyRandomRestaurant(startNumber){
 function callAPIs(radiusDay,length, hiking,mtnbiking){
  //call all of the individual API functions
 
+ 
  getAllRestaurants();
 
  //call getHikes and getBikes if checked and only call PickActivities for one of them)(timing??)
@@ -329,9 +352,10 @@ $('#event-form').submit(function(event){
     let length = $('#min-length').val();
     let hiking = $('#hiking').is(':checked')?'yes':'no';
     let mtnbiking = $('#mountain-biking').is(':checked')?'yes':'no';
-    let radiusNight = $('#radius-night').val();
-    console.log(`rd${radiusDay} lenght${length} hiking${hiking} biking${mtnbiking} rn${radiusNight} `);
-    callAPIs(radiusDay, length, hiking,mtnbiking,radiusNight);
+    let dayCheck = $('#day').is(':checked')?'yes':'no';
+    let nightCheck = $('#night').is(':checked')?'yes':'no';
+    console.log(`the form inputs -rd${radiusDay} lenght${length} hiking${hiking} biking${mtnbiking} dayCheck ${dayCheck} nightCheck ${nightCheck} `);
+    callAPIs(radiusDay, length, hiking,mtnbiking);
 });
     console.log(`watchFormSubmit ran`);
 }

@@ -12,16 +12,24 @@
         <form id="event-form">
             <fieldset name="day-activities">
                 <legend>Day Activities</legend>
+                <label for="day" class="main-label">I want day activities</label>
+                <input type="checkbox" id="day" name="day" checked><br>
                 <label for="radius-day">Radius (mi)</label>
-                <input type="number" name="radius-day" id="radius-day" placeholder="10" value="10">
+                <input type="number" name="radius-day" id="radius-day" placeholder="20" value="20"><br> 
                 <label for="min-length">Min Length (mi)</label>
-                <input type="number" name="min-length" id="min-length" placeholder="0" value="0">
+                <input type="number" name="min-length" id="min-length" placeholder="0" value="0"><br>
                 <label for="hiking">Hiking</label>
                 <input type="checkbox" id="hiking" name="hiking" checked><br>
                 <label for="vehicle2">Mountain Biking</label>
-                <input type="checkbox" id="mountain-biking" name="mountain-biking" checked>               
+                <input type="checkbox" id="mountain-biking" name="mountain-biking" checked>   
+                <p class="note">At this time, our day activities are hiking and mountain biking. Please uncheck "I want day activities" if you know you don't have these activities near the city you are searching.</p>   
             </fieldset>
-            <p>At this time, there are no options for the night activities - it really is a roll of the dice!</p>
+            <fieldset name="day-activities">
+                <legend>Night Activities</legend>
+                <label for="day" class="main-label">I want night activities</label>
+                    <input type="checkbox" id="night" name="night" checked><br>
+                <p class="note">At this time, there are no options you can select for the night activities - it really is a roll of the dice to see where you are going to be eating dinner!</p>
+            </fieldset> 
             <!--fieldset name="night-activities">
                 <legend>Night Activities</legend>
                 <label for="radius-night">Radius (mi)</label>
