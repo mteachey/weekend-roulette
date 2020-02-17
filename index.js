@@ -81,7 +81,8 @@ function displayDayResults(dayWinners){
   $('.results').removeClass('js-hidden');   
   $('.results-header').removeClass('js-hidden'); 
   $('.results-day').removeClass('js-hidden'); 
-  $('.results-day').empty()
+  $('.results-day').empty();
+  $('.results-day').addClass('border');
   $('.results-day').append(`<h3>Your Day Activities</h3>`);
   $('.results-day').append(`<ul class="day-list"></ul>`);
   
@@ -105,6 +106,7 @@ function displayNightResults(nightWinners){
       $('.results-header').removeClass('js-hidden'); 
       $('.results-night').removeClass('js-hidden'); 
       $('.results-night').empty()
+      $('.results-night').addClass('border');
       $('.results-night').append(`<h3>Your Night Activities</h3>`);
       $('.results-night').append(`<ul class="night-list"></ul>`);
      
@@ -133,20 +135,21 @@ const queryitems = Object.keys(params).map(key=>`${encodeURIComponent(key)}=${en
 return queryitems.join('&');    
 }
 
-function formatLatLong(locationResult){
+function formatLatLong(locationResult, city, state){
     latitude = locationResult.geometry.lat;
     longitude = locationResult.geometry.lng;
     
     console.log(`is this the lat : ${locationResult.geometry.lat}`);
     console.log(`is this the lat : ${locationResult.geometry.lng}`);
     
-    displayNewForm();
+    displayNewForm(latitude,longitude,city, state);
     //console.log(latitude);   
 }
 
-function displayNewForm(){
+function displayNewForm(latitude,longitude,city, state){
     $('#location-input').addClass('js-section-hidden');
     $('#activities-input').removeClass('js-section-hidden');
+    $('.location-result').html(`You are searching for activities around ${city},${state} </br> which is at ${latitude} latitude and ${longitude} longitude- just in case you were wondering`);
     console.log(`newForm ran`);
 }
 
@@ -173,7 +176,7 @@ function getLatLong(cityInput, stateInput){
     .then(responseJson=>{
         console.log(`latlong api ran`);
         console.log(responseJson.results[0]);
-        formatLatLong(responseJson.results[0]);
+        formatLatLong(responseJson.results[0], cityInput, stateInput);
     })
     .catch(err => {
         $('#js-error-message').text(`Sorry, something was went wrong finding your location. Check your spelling and try again.`)
@@ -395,6 +398,8 @@ $('#event-form').submit(function(event){
     let mtnbiking = $('#mountain-biking').is(':checked')?'yes':'no';
     let dayCheck = $('#day').is(':checked')?'yes':'no';
     let nightCheck = $('#night').is(':checked')?'yes':'no';
+    //reseting display
+    resetDisplay();
     //console.log(`the form inputs -rd${radiusDay} lenght${length} hiking${hiking} biking${mtnbiking} dayCheck ${dayCheck} nightCheck ${nightCheck} `);
     //clears day results on a new submit
     dayActivity = [];
@@ -414,6 +419,37 @@ function watchLatLongFormSubmit(){
     });
     console.log(`watchLatLong ran`);
 }
+
+function resetLocation(){
+    $('#reset-location').on('click', function() { 
+        $('#location-input').removeClass('js-section-hidden');
+        $('#activities-input').addClass('js-section-hidden');
+        console.log(`resetLocation submit heard`);
+        resetDisplay();
+    })
+    console.log(`resetLocation ran`);
+}
+
+function resetDisplay(){
+    $('.results-day').empty();
+    $('.results-night').empty();
+    $('.results-header').addClass('js-hidden');;
+    $('.results-night').removeClass('border');
+    $('.results-day').removeClass('border');
+}
+
+
+function handleNoDayChecked() {
+    $('#day').on('click', event => {
+      $('.options').toggleClass('js-hidden');
+    });
+    console.log(`handleNoDayChecked ran`);
+  }
+
+
 $(watchActivityFormSubmit);
+$(resetLocation);
+$(handleNoDayChecked);
 $(watchLatLongFormSubmit);
+
 //$(getLatLong);  //right now this runs onload - eventually will be from a submit on a previous screen

@@ -34,6 +34,10 @@ fieldset{
     margin-bottom: 2em;
 }
 
+#latLong-form fieldset{
+    text-align:left;
+}
+
 label, input, button {
     text-align:center;
     margin-top:15px;
@@ -48,6 +52,10 @@ input[type=checkbox]{
 }
 
 input[type=number]{
+    width:50px;
+}
+
+input#state{
     width:50px;
 }
 
@@ -74,6 +82,15 @@ button {
     width:150px;
 }
 
+#reset-location {
+    width: 225px;
+    padding: 5px;
+    margin-bottom: 2em;
+    margin-top: 0;
+    background-color: gray;
+    border: 1px gray solid;
+}
+
 .results {
     max-width: 600px;
     margin: auto;
@@ -89,8 +106,12 @@ button {
 
 .results-day, .results-night{
     margin-bottom:1em;
-    border:1px  solid gray;
+   
     padding:20px;
+}
+
+.border{
+ border:1px  solid gray;
 }
 
 li {
@@ -117,8 +138,6 @@ li.first-item{
 .error-message {
     color: red;
 }
-
-
 
 .night-list img{
     width:250px;
