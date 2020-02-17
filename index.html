@@ -8,6 +8,19 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
+        <form id="latLong-form">
+            <fieldset name="location">
+                <legend>Find Your Latitude and Longitude</legend>
+                <label for="city" >City</label>
+                <input type="text" id="city" name="city" placeholder="Denver" value="Denver"><br>
+                <label for="state">State (abbreviation)</label>
+                <input type="text" name="state" id="state" placeholder="CO" value="CO"><br> 
+                
+                <p class="note">Please be sure to spell your city name correctly.</p>   
+            </fieldset>
+                     
+            <button type="submit">Get Your Coordinates!</button>
+        </form>
         <h1>Let's Get You Something To Do!</h1>
         <form id="event-form">
             <fieldset name="day-activities">
