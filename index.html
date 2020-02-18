@@ -14,7 +14,7 @@
         </header> 
         <section id="intro">
             <p class="intro-text">This app will take the deciding out of your play day - weekend, travel, or just playing hooky.  After providing us with your location and a few selections, you will "roll the dice", to be given your activities for the day and evening.</p>
-            <p class="intro-text">Because we still want to give you some choice (if you want it), you will be provided with two day time activities and two evening ones. At this time, the day time activities will be either a hiking trail, mountain biking trail or one of each and the evening activities will be restaurants.</p><p class="intro-text">Check back for new activity types!</p>               
+            <p class="intro-text">Because we still want to give you some choice (if you want it), you will be provided with two day time activities and two evening ones. At this time, the day time activities will be either a hiking trail, mountain biking trail or one of each and the evening activities will be restaurants.</p><p class="intro-text">Check back for new activity types!</p>            
         </section>
         <section id="location-input">
             <p class="text-align-center">To get started, enter the city and state you would like us to search around in the form below.</p>     
@@ -118,6 +118,9 @@
             </form>
             <p id="js-error-message" class="error-message"></p>
         </section>
+        <!-- this will show our spinner -->
+        <div hidden id="spinner"><img src="_images/rolling-dice-gif-3.gif"/></div>
+        
         <section class="results js-hidden">
             <header class="results-header js-hidden">
                 <h2>Your Activities!</h2>

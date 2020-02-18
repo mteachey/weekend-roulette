@@ -116,6 +116,7 @@ function formatLatLong(locationResult, city, state){
 
 function displayNewForm(latitude,longitude,city, state){
     $('#location-input').addClass('js-section-hidden');
+    $('#intro').addClass('js-section-hidden');
     $('#activities-input').removeClass('js-section-hidden');
     $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check your spelling.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p>`);
 }
@@ -243,6 +244,7 @@ function getAllRestaurants(){
         headers: new Headers(
         {"user-key":"e5800b1de7b26545fe07ad6a49160396",})
       };
+      spinner.removeAttribute('hidden');
       fetch(url, options)
       .then(response =>{   
         if(response.ok){
@@ -251,6 +253,7 @@ function getAllRestaurants(){
         throw new Error(response.statusText);                 
        })
       .then(responseJson=>{
+        spinner.setAttribute('hidden', '');  
         let numberOfResults = responseJson.results_found;
         if(numberOfResults < 2){
             $('#js-error-message').text(`Sorry, it looks like we didn't find restaurants in your city.`)
@@ -265,6 +268,7 @@ function getAllRestaurants(){
      });
     
 }
+//end of API call functions
 
 function getRandomStart(responseJson){
     let numberOfResults = responseJson.results_found;
@@ -357,6 +361,7 @@ function watchLatLongFormSubmit(){
 function resetLocation(){
     $('#reset-location').on('click', function() { 
         $('#location-input').removeClass('js-section-hidden');
+        $('#intro').removeClass('js-section-hidden');
         $('#activities-input').addClass('js-section-hidden');
         let city = $('#city').val("");
         let state = $('#state').val("");
