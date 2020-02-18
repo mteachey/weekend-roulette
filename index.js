@@ -261,7 +261,7 @@ function getAllRestaurants(){
         
         let numberOfResults = responseJson.results_found;
         if(numberOfResults < 2){
-            $('#js-error-message').text(`Sorry, it looks like we didn't find restaurants in your city.`)
+            $('#js-error-message').text(`Sorry, it looks like we didn't find restaurants in your city. Double check your spelling and city name - for example, we can find 'Alameda Island, CA' but not 'Alameda, CA' - we aren't as fancy as Google maps yet!`)
          }
          else {
           getRandomStart(responseJson);
@@ -358,7 +358,8 @@ function watchLatLongFormSubmit(){
      event.preventDefault();
      let letters = /^[A-Za-z ]+$/;
      let city = $('#city').val();
-     let state = $('#state').val();
+    //let state = 'california';
+    let state = $('#state').val();
      if(city.match(letters)){
         getLatLong(city, state);
      }
