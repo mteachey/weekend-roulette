@@ -18,7 +18,7 @@
             <p class="intro-text">Because we still want to give you some choice (if you want it), you will be provided with two day time activities and two evening ones. At this time, the day time activities will be either a hiking trail, mountain biking trail or one of each and the evening activities will be restaurants.</p><p class="intro-text">Check back for new activity types!</p>            
         </section>
         <section id="location-input">
-            <div class="alert js-hidden">
+            <div class="alert-location  alert js-hidden">
                 <span class="closebtn">&times;</span>
                 Please enter only letters.
               </div>
@@ -91,6 +91,10 @@
             </form>
        </section>
        <section id="activities-input" class="js-section-hidden">
+        <div class="alert-activities  alert js-hidden">
+            <span class="closebtn">&times;</span>
+            Sorry, it looks like we didn't find any bikes or hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes and/or hikes.
+          </div>
             <h2>Let's Get You Something To Do!</h2>
             <div class="location-result"></div>
             <button id="reset-location" type="submit">Search New Location</button>
@@ -127,6 +131,7 @@
         <div hidden id="spinner"><img src="https://paintedskycreative.com/_images/weekend-roulette/rolling-dice-gif-3.gif"/></div>
         
         <section class="results js-hidden">
+            <button id="roll-again" type="submit">Roll Again</button>
             <header class="results-header js-hidden">
                 <h2>Your Activities!</h2>
             </header>

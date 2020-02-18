@@ -122,6 +122,7 @@ button {
     max-width: 600px;
     margin: auto;
     text-align: left;
+    border: 0px gray solid;
 }
 
 .night-list, .day-list {
@@ -250,6 +251,10 @@ li.first-item{
         transform: translate(-50%,0);
         border-radius: 10px;
 
+  }
+
+  .alert-activities{
+      top:50%;
   }
   
   /* The close button */

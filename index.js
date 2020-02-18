@@ -57,6 +57,7 @@ function resultsRestaurant(results){
 function displayDayResults(dayWinners){
 //this function display the day results
 //this function will eventually render/display these results plus a start over button, home button, learn more button 
+$('#activities-input').addClass('js-hidden');
   $('.results').removeClass('js-hidden');   
   $('.results-header').removeClass('js-hidden'); 
   $('.results-day').removeClass('js-hidden'); 
@@ -88,7 +89,7 @@ function displayNightResults(nightWinners){
       $('.results-night').addClass('border');
       $('.results-night').append(`<h3>Your Night Activities</h3>`);
       $('.results-night').append(`<ul class="night-list"></ul>`);
-     
+     spinner.setAttribute('hidden', '');  
       
      for(let i=0; i < nightWinners.length; i++){
 
@@ -166,10 +167,11 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
-         
+        //spinner.removeAttribute('hidden');
          let numberOfResults = responseJson.trails.length;
          if(numberOfResults < 2){
-            $('#js-error-message').text(`Sorry, it looks like we didn't find any bikes or hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes. `)
+            //$('#js-error-message').text(`Sorry, it looks like we didn't find any bikes or hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes and/or hikes. `)
+            $('.alert-activities').removeClass('js-hidden');
          }
          else{
                 for (let i=0; i<numberOfResults; i++ ){
@@ -181,6 +183,7 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
                 }
                 else{
                     resultsHikingOrBiking(responseJson, true);
+                    
                 
                     if(nightCheck === 'yes') {
                         getAllRestaurants();}    
@@ -214,9 +217,11 @@ function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
+      //  spinner.removeAttribute('hidden');
         let numberOfResults = responseJson.trails.length;
         if(numberOfResults < 2){
-            $('#js-error-message').text(`Sorry, it looks like we didn't find any hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck hikes. `)
+            //$('#js-error-message').text(`Sorry, it looks like we didn't find any hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck hikes. `)
+            $('.alert-activities').removeClass('js-hidden');
          }
          else {
             for (let i=0; i<numberOfResults; i++ ){
@@ -253,7 +258,7 @@ function getAllRestaurants(){
         throw new Error(response.statusText);                 
        })
       .then(responseJson=>{
-        spinner.setAttribute('hidden', '');  
+        
         let numberOfResults = responseJson.results_found;
         if(numberOfResults < 2){
             $('#js-error-message').text(`Sorry, it looks like we didn't find restaurants in your city.`)
@@ -336,6 +341,7 @@ $('#event-form').submit(function(event){
     let mtnbiking = $('#mountain-biking').is(':checked')?'yes':'no';
     let dayCheck = $('#day').is(':checked')?'yes':'no';
     let nightCheck = $('#night').is(':checked')?'yes':'no';
+   
     //reseting display on every submit
     resetDisplay();
     
@@ -350,7 +356,7 @@ $('#event-form').submit(function(event){
 function watchLatLongFormSubmit(){
     $('#latLong-form').submit(function(event){
      event.preventDefault();
-     let letters = /^[A-Za-z]+$/;
+     let letters = /^[A-Za-z ]+$/;
      let city = $('#city').val();
      let state = $('#state').val();
      if(city.match(letters)){
@@ -358,7 +364,7 @@ function watchLatLongFormSubmit(){
      }
      else
       {
-      $('.alert').removeClass('js-hidden')
+      $('.alert-location').removeClass('js-hidden')
       }
     // getLatLong(city, state);
     });  
@@ -369,16 +375,25 @@ function resetLocation(){
         $('#location-input').removeClass('js-section-hidden');
         $('#intro').removeClass('js-section-hidden');
         $('#activities-input').addClass('js-section-hidden');
-        let city = $('#city').val("");
-        let state = $('#state').val("");
+        //$('#city').val("");
+        //$('#state').val("");
+        $("#event-form")[0].reset();
+        resetDisplay();
+    })    
+}
+
+function rollAgain(){
+    $('#roll-again').on('click',function(){
+        $('#activities-input').removeClass('js-hidden');
         resetDisplay();
     })
-    
 }
+
 
 function resetDisplay(){
     $('.results-day').empty();
     $('.results-night').empty();
+    $('.results').addClass('js-hidden');
     $('.results-header').addClass('js-hidden');;
     $('.results-night').removeClass('border');
     $('.results-day').removeClass('border');
@@ -397,7 +412,7 @@ function handleNoDayChecked() {
     });
  } 
 
-
+ $(rollAgain);
 $(watchActivityFormSubmit);
 $(resetLocation);
 $(handleNoDayChecked);
