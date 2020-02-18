@@ -117,7 +117,7 @@ function formatLatLong(locationResult, city, state){
 function displayNewForm(latitude,longitude,city, state){
     $('#location-input').addClass('js-section-hidden');
     $('#activities-input').removeClass('js-section-hidden');
-    $('.location-result').html(`You are searching for activities around ${city},${state} </br> which is at ${latitude}<sup>o</sup> latitude and ${longitude}<sup>o</sup> longitude - just in case you were wondering`);
+    $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check your spelling.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p>`);
 }
 
 
@@ -358,7 +358,8 @@ function resetLocation(){
     $('#reset-location').on('click', function() { 
         $('#location-input').removeClass('js-section-hidden');
         $('#activities-input').addClass('js-section-hidden');
-        
+        let city = $('#city').val("");
+        let state = $('#state').val("");
         resetDisplay();
     })
     
