@@ -94,7 +94,7 @@ function displayNightResults(nightWinners){
 
        $('.night-list').append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
       $('.night-list').append(`<li class="night-list-item">Name: ${nightWinners[i].restaurant.name}</li>`);
-      $('.night-list').append(`<li class="night-list-item link"><a href="${nightWinners[i].restaurant.url}">Link: ${nightWinners[i].restaurant.url}</a></li>`);
+      $('.night-list').append(`<li class="night-list-item link"><a href="${nightWinners[i].restaurant.url}" targe="_blank">Link: ${nightWinners[i].restaurant.url}</a></li>`);
       $('.night-list').append(`<li class="night-list-item">Address: ${nightWinners[i].restaurant.location.address}</li>`);
       
       $('.night-list').append(`<li class="night-list-item">Cuisine: ${nightWinners[i].restaurant.cuisines}</li>`);
@@ -350,12 +350,18 @@ $('#event-form').submit(function(event){
 function watchLatLongFormSubmit(){
     $('#latLong-form').submit(function(event){
      event.preventDefault();
+     let letters = /^[A-Za-z]+$/;
      let city = $('#city').val();
      let state = $('#state').val();
-     
-     getLatLong(city, state);
-    });
-    
+     if(city.match(letters)){
+        getLatLong(city, state);
+     }
+     else
+      {
+      $('.alert').removeClass('js-hidden')
+      }
+    // getLatLong(city, state);
+    });  
 }
 
 function resetLocation(){
@@ -385,9 +391,16 @@ function handleNoDayChecked() {
     });
   }
 
+ function handleCloseButton(){
+    $('.closebtn').on('click', event => {
+     $('.alert').addClass('js-hidden');
+    });
+ } 
+
 
 $(watchActivityFormSubmit);
 $(resetLocation);
 $(handleNoDayChecked);
+$(handleCloseButton);
 $(watchLatLongFormSubmit);
 

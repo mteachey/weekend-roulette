@@ -40,6 +40,7 @@ section {
     margin: 1em auto;
     padding: 20px;
     border: 1px gray solid;
+    position: relative;
 }
 
 form {
@@ -233,4 +234,38 @@ li.first-item{
       transform: rotate(360deg);
     }
   }*/
+
+  /*custom alert*/
+  /* The alert message box */
+.alert {
+        padding: 20px;
+        background-color: #000;
+        border:1px solid red;
+        color: white;
+        margin-bottom: 15px;
+        position: absolute;
+        width: 500px;
+        left: 50%;
+        top: 100px;
+        transform: translate(-50%,0);
+        border-radius: 10px;
+
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: red;
+  }
   
