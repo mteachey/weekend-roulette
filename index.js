@@ -110,7 +110,7 @@ function displayNightResults(nightWinners){
 function formatLatLong(locationResult, city, state){
     latitude = locationResult.geometry.lat;
     longitude = locationResult.geometry.lng;
-    
+    globe.setAttribute('hidden', '');  
     displayNewForm(latitude,longitude,city, state);
        
 }
@@ -129,7 +129,7 @@ function getLatLong(cityInput, stateInput){
     const city = encodeURIComponent(cityInput); 
     const state = encodeURIComponent(stateInput);
     const url = `${latLongEndPoint}?key=${latLongKey}&q=${city}+${state}&no_annotations&pretty=1`;
-    
+    globe.removeAttribute('hidden');
     fetch(url)
     .then(response=>{
         if(response.ok){
@@ -379,6 +379,7 @@ function resetLocation(){
         //$('#city').val("");
         //$('#state').val("");
         $("#event-form")[0].reset();
+        $('.location-result').empty();
         resetDisplay();
     })    
 }
@@ -386,15 +387,21 @@ function resetLocation(){
 function rollAgain(){
     $('#roll-again').on('click',function(){
         $('#activities-input').removeClass('js-hidden');
-        resetDisplay();
+        $('.results-day').empty();
+        $('.results-night').empty();
+        $('.results').addClass('js-hidden');
+        $('.results-header').addClass('js-hidden');;
+        $('.results-night').removeClass('border');
+        $('.results-day').removeClass('border');
+        $('.options').removeClass('js-hidden');
+        //resetDisplay();
     })
 }
 
 
 function resetDisplay(){
-    $('.results-day').empty();
-    $('.results-night').empty();
     $('.results').addClass('js-hidden');
+    $('#activities-input').addClass('js-hidden');
     $('.results-header').addClass('js-hidden');;
     $('.results-night').removeClass('border');
     $('.results-day').removeClass('border');

@@ -205,7 +205,7 @@ li.first-item{
     display:none;
 }
 /*loading spinner*/
-#spinner:not([hidden]) {
+#spinner:not([hidden]), #globe:not([hidden]) {
     position: fixed;
     top: 0;
     left: 0;
@@ -215,6 +215,10 @@ li.first-item{
     justify-content: center;
     align-items: center;
   }
+
+  #globe img,  #spinner img {
+    width: 100px;
+}
   
   /*#spinner::after {
     content: "";
