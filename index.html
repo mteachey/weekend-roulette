@@ -8,13 +8,13 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <header>
-            <h1 class="title">
+        <header class="header">
+            <h1 class="title align-left">
                <span class="text-wrapper">
                 <span class="letters">Weekend Roulette</span>
               </span>
             </h1>
-            <h2 class="italic">Play Hard, Decide Easy.</h2> 
+            <h2 class="italic align-left">Play Hard, Decide Easy.</h2> 
             <div class="rotating-text">
                 <div class="rotating-text__container">
                   <p class="rotating-text__container__text">
@@ -23,7 +23,7 @@
                   <ul class="rotating-text__container__list">
                     <li class="rotating-text__container__list__item">hike ?</li>
                     <li class="rotating-text__container__list__item">mountain bike ?</li>
-                    <li class="rotating-text__container__list__item">eat Chinese ?</li>
+                    <li class="rotating-text__container__list__item">eat pizza ?</li>
                     <li class="rotating-text__container__list__item">eat Thai ?</li>
                     <li class="rotating-text__container__list__item">get muddy?</li>
                     <li class="rotating-text__container__list__item">go fast ?</li>
@@ -37,9 +37,8 @@
               
         
         </header> 
-        <section id="start-screen" class="js-hidden">
-            <button></button>
-
+        <section id="start-screen">
+            <button id="start" class="white-button" type="submit">Let's Go!</button>
         </section>
         
         <section id="intro" class="js-hidden">
@@ -69,7 +68,7 @@
                         
                 <button type="submit">Get Your Coordinates!</button>
             </form>
-            <div hidden id="globe"><img src="_images/world.gif"/></div>
+            <div hidden id="globe"><img src="https://paintedskycreative.com/_images/weekend-roulette/world.gif"/></div>
        </section>
        <section id="activities-input" class="js-section-hidden">
         <div class="alert-activities  alert js-hidden">

@@ -1,5 +1,5 @@
-var bgImageArray = ["mountainbike-tire2.jpg","hike-girl-boots.jpg", "cheers.jpg", "hike-sun-stand-boots.jpg","hike-sun-boots2.jpg","restaurant-sun.jpg", "hike-view.jpg", "hike-sedona.jpg", "mtnbike-sun2.jpg","hike-sun-boots3.jpg", "bike-view.jpg"],
-base = "_images/",
+var bgImageArray = ["mtnbike-bike.jpg","hike-boots-girl.jpg", "restaurant-cheers.jpg", "hike-boots-view.jpg","mtnbike-bike-view.jpg","restaurant-sunlight.jpg"],
+base = "https://paintedskycreative.com/_images/weekend-roulette/",
 secs = 4;
 bgImageArray.forEach(function(img){
     new Image().src = base + img; 
@@ -17,7 +17,7 @@ function backgroundSequence() {
 		}, (secs * 1000) * i)	
 	}
 }
-backgroundSequence();
+//backgroundSequence();
 
 // Wrap every letter in a span
 var textWrapper = document.querySelector('.title .letters');

@@ -398,6 +398,19 @@ function rollAgain(){
     })
 }
 
+function start(){
+    $('#start').on('click',function(){
+        event.preventDefault();
+        $('#start-screen').addClass('js-hidden');
+        $('.rotating-text').addClass('js-hidden');
+        $('.header').css("top", "0px");
+        $('.header').css("height", "180px");
+        $('#intro').removeClass('js-hidden');
+        $('#location-input').removeClass('js-hidden');
+
+    });
+}
+
 
 function resetDisplay(){
     $('.results').addClass('js-hidden');
@@ -419,10 +432,11 @@ function handleNoDayChecked() {
      $('.alert').addClass('js-hidden');
     });
  } 
-
+$(start);
  $(rollAgain);
 $(watchActivityFormSubmit);
 $(resetLocation);
+$(start);
 $(handleNoDayChecked);
 $(handleCloseButton);
 $(watchLatLongFormSubmit);
