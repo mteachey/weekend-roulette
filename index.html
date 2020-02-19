@@ -9,16 +9,45 @@
     </head>
     <body>
         <header>
-            <h1>Weekend Roulette</h1>
+            <h1 class="title">
+               <span class="text-wrapper">
+                <span class="letters">Weekend Roulette</span>
+              </span>
+            </h1>
             <h2 class="italic">Play Hard, Decide Easy.</h2> 
-        </header> 
+            <div class="rotating-text">
+                <div class="rotating-text__container">
+                  <p class="rotating-text__container__text">
+                    Will you
+                  </p>                 
+                  <ul class="rotating-text__container__list">
+                    <li class="rotating-text__container__list__item">hike ?</li>
+                    <li class="rotating-text__container__list__item">mountain bike ?</li>
+                    <li class="rotating-text__container__list__item">eat Chinese ?</li>
+                    <li class="rotating-text__container__list__item">eat Thai ?</li>
+                    <li class="rotating-text__container__list__item">get muddy?</li>
+                    <li class="rotating-text__container__list__item">go fast ?</li>
+                    <!--li class="rotating-text__container__list__item">eat a hamburger?</li>
+                    <li class="rotating-text__container__list__item">eat Pizza?</li>
+                    <li class="rotating-text__container__list__item">get muddy?</li>
+                    <li class="rotating-text__container__list__item">go fast?</li-->
+                  </ul>
+                </div>
+              </div>
+              
         
-        <section id="intro">
+        </header> 
+        <section id="start-screen" class="js-hidden">
+            <button></button>
+
+        </section>
+        
+        <section id="intro" class="js-hidden">
             <p class="intro-text">This app will take the deciding out of your play day - weekend, travel, or just playing hooky.  After providing us with your location and a few selections, you will "roll the dice", to be given your activities for the day and evening.</p>
 
             <p class="intro-text">Because we still want to give you some choice (if you want it), you will be provided with two day time activities and two evening ones. At this time, the day time activities will be either a hiking trail, mountain biking trail or one of each and the evening activities will be restaurants.</p><p class="intro-text">Check back for version 2 with more activity types and better search features!</p> 
         </section>
-        <section id="location-input">
+        <section id="location-input" class="js-hidden" >
             <div class="alert-location  alert js-hidden">
                 <span class="closebtn">&times;</span>
                 Please enter only letters.
@@ -92,6 +121,8 @@
         </section>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+        <script src="js-for-styling.js"></script>
     </body>
 </html>
 
