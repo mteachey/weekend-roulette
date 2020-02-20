@@ -57,7 +57,7 @@ function resultsRestaurant(results){
 function displayDayResults(dayWinners){
 //this function display the day results
 //this function will eventually render/display these results plus a start over button, home button, learn more button 
-$('#activities-input').addClass('js-hidden');
+  $('#activities-input').addClass('js-hidden');
   $('.results').removeClass('js-hidden');   
   $('.results-header').removeClass('js-hidden'); 
   $('.results-day').removeClass('js-hidden'); 
@@ -111,15 +111,16 @@ function formatLatLong(locationResult, city, state){
     latitude = locationResult.geometry.lat;
     longitude = locationResult.geometry.lng;
     globe.setAttribute('hidden', '');  
-    displayNewForm(latitude,longitude,city, state);
+    displayActivityForm(latitude,longitude,city, state);
        
 }
 
-function displayNewForm(latitude,longitude,city, state){
-    $('#location-input').addClass('js-section-hidden');
-    $('#intro').addClass('js-section-hidden');
-    $('#activities-input').removeClass('js-section-hidden');
+function displayActivityForm(latitude,longitude,city, state){
+    $('#location-input').addClass('js-hidden');
+    $('#intro').addClass('js-hidden');
+    $('#activities-input').removeClass('js-hidden');
     $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check your spelling.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p>`);
+    console.log(`displayActivityForm ran`)
 }
 
 
@@ -373,9 +374,9 @@ function watchLatLongFormSubmit(){
 
 function resetLocation(){
     $('#reset-location').on('click', function() { 
-        $('#location-input').removeClass('js-section-hidden');
-        $('#intro').removeClass('js-section-hidden');
-        $('#activities-input').addClass('js-section-hidden');
+        $('#location-input').removeClass('js-hidden');
+        $('#intro').removeClass('js-hidden');
+        $('#activities-input').addClass('js-hidden');
         //$('#city').val("");
         //$('#state').val("");
         $("#event-form")[0].reset();
@@ -399,18 +400,70 @@ function rollAgain(){
 }
 
 function start(){
-    $('#start').on('click',function(){
+    $('.start-button').on('click',function(){
         event.preventDefault();
         $('#start-screen').addClass('js-hidden');
-        $('.rotating-text').addClass('js-hidden');
-        $('.header').css("top", "0px");
-        $('.header').css("height", "180px");
-        $('#intro').removeClass('js-hidden');
+        
+        $('#intro').addClass('js-hidden');
         $('#location-input').removeClass('js-hidden');
-
+        displayNewBackground();
     });
 }
 
+function handleLearnMoreSubmit(){
+    $('#learnmore-intro').on('click',function(){
+        event.preventDefault();
+        displayIntro();
+        displayNewBackground();
+        console.log(`lm-intro click`);
+
+    })
+    
+    $('#learnmore-activities').on('click',function(){
+        event.preventDefault();
+        displayIntro();
+        console.log(`lm-act click`);
+    })
+    $('#learnmore-location').on('click',function(){
+        event.preventDefault();
+        displayIntro();
+        console.log(`lm-loc click`);
+    })
+    console.log(`handleLearnMoreSubmit ran`);
+}
+
+function handleLearnMoreResults(){
+    $('#learnmore-results').on('click',function(){
+        event.preventDefault();
+        displayIntrowithResults();
+        console.log(`lm-results click`);
+    })
+}
+
+function displayIntro(){   
+        $('#intro').removeClass('js-hidden');
+        $('#start-screen').addClass('js-hidden');
+        $('.rotating-text').addClass('js-hidden');
+        $('#location-input').addClass('js-hidden');
+        $('.results').addClass('js-hidden');
+        $('#activities-input').addClass('js-hidden');
+        $('#start-intro').removeClass('js-hidden');
+        $('#remove-intro').addClass('js-hidden');
+        console.log(`displayIntro ran`);
+}
+
+function displayIntrowithResults(){
+    $('#intro').removeClass('js-hidden');
+    $('#start-screen').addClass('js-hidden');
+    $('.rotating-text').addClass('js-hidden');
+    $('#location-input').addClass('js-hidden');
+   // $('.results').addClass('js-hidden');
+    $('#activities-input').addClass('js-hidden');
+    $('#start-intro').addClass('js-hidden');
+    $('#remove-intro').removeClass('js-hidden');
+    console.log(`displayIntro ran`);
+
+};
 
 function resetDisplay(){
     $('.results').addClass('js-hidden');
@@ -418,6 +471,7 @@ function resetDisplay(){
     $('.results-header').addClass('js-hidden');;
     $('.results-night').removeClass('border');
     $('.results-day').removeClass('border');
+    $('#intro').addClass('js-hidden');
 }
 
 
@@ -432,12 +486,47 @@ function handleNoDayChecked() {
      $('.alert').addClass('js-hidden');
     });
  } 
+
+ function handleRemoveIntro(){
+    $('#remove-intro').on('click', event => {
+     $('#intro').addClass('js-hidden');
+    });
+ } 
+
+function displayNewBackground(){
+   $('.mask').addClass('js-hidden');
+    $('main').addClass('main-background');
+   $('#location-input').removeClass('js-slide-in');
+   $('#location-input').addClass('js-fade-in');
+   $('#start-screen').addClass('js-hidden');
+   $('section').css('position','static'); 
+   //$('section').css('margin-left','47%');
+   $('.header').removeClass('header-start');
+   $('.rotating-text').css('position','static');
+   $('.rotating-text').css('width','unset');
+   $('.tagline').addClass('js-hidden');
+     //$('.header').css('left','0');
+   /*  $('.header').css('font-size','10px');
+     $('.header').css('padding','3px');
+     $('.rotating-text').addClass('js-hidden');
+        $('.header').css("top", "15px");
+        $('.header').css("height", "125px");
+        $('.header').css("position", "absolute");*
+      //  $('.header').css("color", "#000");*/
+     console.log(`displayNewBackground ran`);
+ }
+
+ 
+
 $(start);
- $(rollAgain);
+$(handleLearnMoreResults);
+$(handleLearnMoreSubmit);
+$(rollAgain);
 $(watchActivityFormSubmit);
 $(resetLocation);
 $(start);
 $(handleNoDayChecked);
+$(handleRemoveIntro);
 $(handleCloseButton);
 $(watchLatLongFormSubmit);
 

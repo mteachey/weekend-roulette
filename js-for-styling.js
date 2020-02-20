@@ -1,6 +1,6 @@
 //var bgImageArray = ["mtnbike-bike.jpg","hike-boots-girl.jpg", "restaurant-cheers.jpg", "hike-boots-view.jpg","mtnbike-bike-view.jpg","restaurant-sunlight.jpg"],
 //base = "https://paintedskycreative.com/_images/weekend-roulette/",
-secs = 4;
+/*secs = 4;
 bgImageArray.forEach(function(img){
     new Image().src = base + img; 
     // caches images, avoiding white flash between background replacements
@@ -17,7 +17,7 @@ function backgroundSequence() {
 		}, (secs * 1000) * i)	
 	}
 }
-//backgroundSequence();
+//backgroundSequence();*/
 
 // Wrap every letter in a span
 var textWrapper = document.querySelector('.title .letters');

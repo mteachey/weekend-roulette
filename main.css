@@ -7,27 +7,45 @@ html {
       width: 100%;
     font-family: 'Nunito', sans-serif;
     text-align: center;
+    
+    background-color:#000;
+    
+    /*transition: 3s;*/
+    
+}
+
+body{
+    height: 100%;
+    min-height:700px;
+    width: 100%;
+    margin-top: -20px;
     background-image:url(https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg);
-    /*background-image:url(_images/hikers-line.jpg);*/
     background-position:center center;
     background-size:cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    position:relative;
-    background-blend-mode: darken;
-    transition: 3s;
-}
-
-body{
-    height:100vh
     
 }
 
-.mask {
+/*.mask {
     width: 100%;
+    height:100vh;
     background-color: rgba(0,0,0,.5);
     padding-bottom: 150px;
     margin-top: -50px;
+    position:relative;
+    top:0;
+    left:0;
+    opacity:1;
+    padding-bottom: 25px;
+    transition: background-color .25s linear;
+}*/
+
+.mask {
+    height: 2000px;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.5);
 }
 
 h1, h2, h3{
@@ -38,6 +56,7 @@ h1, h2, h3{
 
 h1{
     font-size:2.5rem;
+    height:100px;
 }
 
 h2 {
@@ -52,41 +71,105 @@ p{
     text-align:left;
 }
 
+main{
+    background-color:rgba(0,0,0,0)
+}
+
+.main-background{
+    background-color:rgba(0,0,0,.85);
+    width: 60%;
+    margin-left:39%;
+    padding-left: 20px;
+    padding-bottom:20px;
+    transition: 2s background-color;
+    box-shadow: -3px -4px 18px 9px rgba(0,0,0,0.75);
+}
+
 .header{
     text-align: left;
+    max-width: none;
+    width: 100%;
+    margin: 1em auto;
+    margin-top:20px;
+    padding: 0px;
+    /*position: fixed;
+    left:72%;
+    top:25%;
+    transform: translate(-50%,-25%);
+    height: 288px;
+    color:#fff;
+    font-size:15px;*/
+    color:#fff;
+    font-size :8px;
+   /* margin-left:45%;*/
+    position:static;
+    background-color: rgba(43, 29, 14, 0);
+    display:flex;
+
+}
+
+.header-start{
+    padding: 20px;
+    position:fixed;
+    left:72%;
+    top:25%;
+    transform: translate(-50%,-25%);
+    height: 288px;
+    font-size:15px;
+    margin-left:0;
     max-width: 700px;
     width: 95%;
-    margin: 1em auto;
-    padding: 20px;
-    position: relative;
-    left:250px;
-    top:25%;
-    height: 300px;
-    color:#fff;
+    display:block;
+
 }
 
 section {
     text-align: left;
     max-width: 700px;
     width: 95%;
-    margin: 1em auto;
+   /* margin: 1em auto;*/
     padding: 20px;
-    position: relative;
-    left:250px;
-    background-color:rgba(255, 255, 255, 0.85);
+    position: absolute;
+    left:45%;
+    top:0px;
+   /* left:0;*/
+    /*background-color:rgba(255, 255, 255, 0.85);
     background-color:rgba(0, 0, 0, 0.6);
-    background-color:rgba(129, 78, 24, 0.95);
-    background-color: rgba(43, 29, 14, .8);
+    background-color:rgba(129, 78, 24, 0.95);*/
+    /*background-color: rgba(43, 29, 14, 1);*/
+   
     border: 4px double rgba(255,255,255,0.3);
-    
     color:#fff;
+   
+    transition: 2s opacity;
+    transition:2s left;
+    margin-top:-45px;
 }
 
-#start-screen{
+.transparent{
+    opacity:0;
+    transition:2s opacity;
+}
+
+section.fade-in{
+    opacity:1;
+    transition: 1s opacity;
+    transition-delay:1s;
+   /* top:0;
+    transition: 1s top;*/
+    
+}
+
+.start-screen{
     background-color: rgba(43, 29, 14, 0);
     border: 0px double rgba(255,255,255,0);
-    top:50px;
-    
+    opacity:1;
+    left:40%;
+    top:65%;
+    display:flex;
+    justify-content: space-around;
+    position:fixed;  
+    margin-top:0;
 }
 
 form {
@@ -147,7 +230,7 @@ select {
 }
 
 button {
-    border: 1px #000 solid;
+    border: 2px #fff solid;
     background-color:#000;
     color: #fff;
     border-radius: 10px;
@@ -160,11 +243,17 @@ button {
     background-color: rgba(255,255,255,1);
 }
 
-#start{
-    margin: auto;
-    margin-top: 20px;
+
+.grey-button {
     display: block;
+    color: #fff;
+    background-color: rgba(255,255,255,0.25);
+    /* margin: auto; */
+    margin: 15px auto;
+    margin-bottom: 0;
+    border: rgba(255,255,255,.25) solid 1px;
 }
+
 
 #reset-location {
     width: 225px;
@@ -255,8 +344,23 @@ li.first-item{
     font-size: 14px;
 }
 
+.loading-image{
+position: absolute;
+top: 70%;
+left: 66%;
+transform: translate(-50%, -50%);
+}
+
 .js-hidden{
     display:none;
+}  
+
+.js-slide-in{
+   left:-2000px
+}
+
+.js-fade-in{
+  opacity:1;
 }
 
 .js-section-hidden{
@@ -264,15 +368,21 @@ li.first-item{
 }
 /*loading spinner*/
 #spinner:not([hidden]), #globe:not([hidden]) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: absolute;
+    top: 70%;
+    left: 66%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
+  .loading-image{
+    position: absolute;
+    top: 70%;
+    left: 66%;
+    transform: translate(-50%, -50%);
+    }
 
   #globe img,  #spinner img {
     width: 100px;
@@ -371,21 +481,22 @@ li.first-item{
       .rotating-text {
         position: absolute;
         bottom: 0%;
-        left: 50%;
-        transform: translate(-50%, 0%);
+        left: 0%;
+        transform: translate(0%, 0%);
         height: 100px;
         overflow: hidden;
         font-family: "Lato", sans-serif;
         font-size: 35px;
         line-height: 40px;
         color: #ecf0f1;
-        width:600px;
+        width:100%;
       }
       .rotating-text__container {
         font-weight: 600;
         overflow: hidden;
         height: 58px;
         padding: 0 40px;
+        padding-left: 20px;
       }
       
       .rotating-text__container__text {
