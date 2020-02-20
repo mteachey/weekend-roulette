@@ -7,7 +7,7 @@ html {
       width: 100%;
     font-family: 'Nunito', sans-serif;
     text-align: center;
-    background-image:url(https://paintedskycreative.com/_images/weekend-roulette/mtnbike-bike.jpg);
+    background-image:url(https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg);
     /*background-image:url(_images/hikers-line.jpg);*/
     background-position:center center;
     background-size:cover;
@@ -19,10 +19,15 @@ html {
 }
 
 body{
-    margin-top: -16px;
+    height:100vh
+    
+}
+
+.mask {
+    width: 100%;
     background-color: rgba(0,0,0,.5);
-    height: 100%;
-    padding-bottom: 100px;
+    padding-bottom: 150px;
+    margin-top: -50px;
 }
 
 h1, h2, h3{
@@ -47,7 +52,7 @@ p{
     text-align:left;
 }
 
-header{
+.header{
     text-align: left;
     max-width: 700px;
     width: 95%;
@@ -151,8 +156,8 @@ button {
 }
 
 .white-button {
-    background-color: #fff;
-    color: #2b1d0e;
+    color: rgba(43, 29, 14, 1);
+    background-color: rgba(255,255,255,1);
 }
 
 #start{
@@ -166,8 +171,9 @@ button {
     padding: 5px;
     margin-bottom: 2em;
     margin-top: 0;
-    background-color: gray;
+    background-color: rgba(255,255,255,.75);
     border: 1px gray solid;
+    background-color: rgba(255,255,255,.75);
 }
 
 .results {

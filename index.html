@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
+        <div class="mask">
         <header class="header">
             <h1 class="title align-left">
                <span class="text-wrapper">
@@ -68,7 +69,7 @@
                         
                 <button type="submit">Get Your Coordinates!</button>
             </form>
-            <div hidden id="globe"><img src="https://paintedskycreative.com/_images/weekend-roulette/world.gif"/></div>
+            <div hidden id="globe"><img src="https://paintedskycreative.com/_external-images/weekend-roulette/world.gif"/></div>
        </section>
        <section id="activities-input" class="js-section-hidden">
         <div class="alert-activities  alert js-hidden">
@@ -77,7 +78,7 @@
           </div>
             <h2>Let's Get You Something To Do!</h2>
             <div class="location-result"></div>
-            <button id="reset-location" type="submit">Search New Location</button>
+            <button id="reset-location" type="submit" class="white-button">Search New Location</button>
             <form id="event-form">
                 <fieldset name="day-activities">
                     <legend>Day Activities</legend>
@@ -102,16 +103,16 @@
                         <input type="checkbox" id="night" name="night" checked><br>
                     <p class="note">At this time, there are no options you can select for the evening activities - it really is a roll of the dice to see where you are going to be eating dinner!</p>
                 </fieldset>         
-                <button type="submit">Roll the Dice</button>
+                <button type="submit" class="white-button">Roll the Dice</button>
                 <p class="note">Sometimes, I need a little extra time to find your best restaurant selections.</p>
             </form>
             <p id="js-error-message" class="error-message"></p>
         </section>
         <!-- this will show our spinner for the activities-->
-        <div hidden id="spinner"><img src="https://paintedskycreative.com/_images/weekend-roulette/rolling-dice-gif-3.gif"/></div>
+        <div hidden id="spinner"><img src="https://paintedskycreative.com/_external-images/weekend-roulette/rolling-dice-gif-3.gif"/></div>
         
         <section class="results js-hidden">
-            <button id="roll-again" type="submit">Roll Again</button>
+            <button id="roll-again" class="white-button" type="submit">Roll Again</button>
             <header class="results-header js-hidden">
                 <h2>Your Activities!</h2>
             </header>
@@ -122,6 +123,7 @@
         <script src="index.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
         <script src="js-for-styling.js"></script>
+    </div>
     </body>
 </html>
 

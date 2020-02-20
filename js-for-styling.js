@@ -1,5 +1,5 @@
-var bgImageArray = ["mtnbike-bike.jpg","hike-boots-girl.jpg", "restaurant-cheers.jpg", "hike-boots-view.jpg","mtnbike-bike-view.jpg","restaurant-sunlight.jpg"],
-base = "https://paintedskycreative.com/_images/weekend-roulette/",
+//var bgImageArray = ["mtnbike-bike.jpg","hike-boots-girl.jpg", "restaurant-cheers.jpg", "hike-boots-view.jpg","mtnbike-bike-view.jpg","restaurant-sunlight.jpg"],
+//base = "https://paintedskycreative.com/_images/weekend-roulette/",
 secs = 4;
 bgImageArray.forEach(function(img){
     new Image().src = base + img; 
