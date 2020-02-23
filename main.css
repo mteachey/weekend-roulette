@@ -1,3 +1,15 @@
+/*fonts
+font-family: 'Rammetto One', cursive;
+font-family: 'Bungee Shade', cursive;
+font-family: 'Limelight', cursive;
+font-family: 'Vast Shadow', cursive;
+font-family: 'Comfortaa', cursive;
+font-family: 'Righteous', cursive;
+font-family: 'Bowlby One SC', cursive;
+font-family: 'Monoton', cursive;
+
+*/
+
 * {
     box-sizing: border-box;
 }
@@ -19,13 +31,41 @@ body{
     min-height:700px;
     width: 100%;
     margin-top: -20px;
-    background-image:url(https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg);
+   /* background-image:url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg);background-image:url(_images/vegas-rolling-dice.jpg");*/
+   background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");
+   background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/hike-boots-girl.jpg");
+  background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/restaurant-sunlight.jpg");
+    background-image:url("_images/roulette.jpg");
+   
     background-position:center center;
     background-size:cover;
     background-attachment: fixed;
-    background-repeat: no-repeat;
-    
+    background-repeat: no-repeat;  
+   /*animation: changeBg 10s infinite;
+   animation-delay:0s;
+   animation-timing-function: linear;*/
 }
+
+@keyframes changeBg
+{
+   0% , 21%, 100%  {background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/restaurant-sunlight.jpg");}
+   25%,46% {background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");}
+   50%,71%  {background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/hike-boots-girl.jpg");}
+   75%, 96% {background-image: url("_images/roulette.jpg");}
+}
+
+/*@keyframes changeBg
+{
+   0% , 100%  {background-image: url("_images/vegas-roulette-reverse.jpg");}
+   25% {background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");}
+   50%  {background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/hike-boots-girl.jpg");}
+   75% {background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/restaurant-sunlight.jpg");}
+}*/
+
+
+
+
+
 
 /*.mask {
     width: 100%;
@@ -45,7 +85,56 @@ body{
     height: 2000px;
     width: 100%;
     position: fixed;
+    background-position:center center;
+    background-size:cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat; 
+    
+    
+    /*animation: changeBgColor 3s linear;
+    animation-fill-mode: forwards;*/
+}
+
+.mask1{
+    background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/restaurant-sunlight.jpg");
+    opacity:0;
+    animation: changeOpacity 20s linear infinite;
+    animation-delay:0s;
+    animation-fill-mode: forwards;
+}
+
+
+.mask2{
+    background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");
+    opacity:0;
+    animation: changeOpacity 20s linear infinite;
+    animation-delay:5s;
+    animation-fill-mode: forwards;
+}
+
+.mask3{
+    background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/hike-boots-girl.jpg");
+    opacity:0;
+    animation: changeOpacity 20s linear infinite;
+    animation-delay:10s;
+    animation-fill-mode: forwards;
+}
+
+.mask4{
     background-color: rgba(0,0,0,.5);
+}
+
+@keyframes changeOpacity{
+    0%, 25%, 75%, 100%{opacity:0;}
+    50%{opacity:1;}
+}
+
+@keyframes changeBgColor{
+  0%{background-color: rgba(0,0,0,1);}
+  25%{background-color: rgba(0,0,0,1);}
+  50%{background-color: rgba(0,0,0,.95);}
+  75%{background-color: rgba(0,0,0,.9);}
+  100% {background-color: rgba(0,0,0,.5);}
 }
 
 h1, h2, h3{
@@ -57,6 +146,14 @@ h1, h2, h3{
 h1{
     font-size:2.5rem;
     height:100px;
+   
+/*font-family: 'Bungee Shade', cursive;
+font-family: 'Limelight', cursive;
+
+font-family: 'Bowlby One SC', cursive;
+font-family: 'Monoton', cursive;*/
+    font-family: 'Monoton', cursive;
+    text-shadow: 2px 2px #ff3300;
 }
 
 h2 {
@@ -451,7 +548,7 @@ transform: translate(-50%, -50%);
   .title {
     position: relative;
     font-weight: 900;
-    font-size: 4em;
+    font-size: 3em;
   }
   
   .title .text-wrapper {
