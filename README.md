@@ -8,7 +8,9 @@ Files included — index.html, main.css, index.js
 Copyright 2020
 Contact info - melindateachey@gmail.com
 
-Credits and acknowledgments — Coming Soon
+Credits and acknowledgments — 
+1) Thanks Css Tricks and Chris Coyier for help with styling a select menu
+https://css-tricks.com/styling-a-select-like-its-2019/
 
 Changelog (usually for programmers) — None at this time
 

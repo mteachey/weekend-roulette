@@ -56,24 +56,25 @@ function resultsRestaurant(results){
 
 function displayDayResults(dayWinners){
 //this function display the day results
-//this function will eventually render/display these results plus a start over button, home button, learn more button 
+
   $('#activities-input').addClass('js-hidden');
+  $('.main').addClass('main-background-wider');
   $('.results').removeClass('js-hidden');   
   $('.results-header').removeClass('js-hidden'); 
   $('.results-day').removeClass('js-hidden'); 
   $('.results-day').empty();
   $('.results-day').addClass('border');
   $('.results-day').append(`<h3>Your Day Activities</h3>`);
-  $('.results-day').append(`<ul class="day-list"></ul>`);
+  $('.results-day').append(`<div class="day-list-container"></div>`);
   
   
  for(let i=0; i < dayWinners.length; i++){
-    $('.day-list').append(`<li class="day-list-item first-item">Option ${i+1} is a ${dayWinners[i].category} trail</li>`);
-    $('.day-list').append(`<li class="day-list-item">Trail Name: ${dayWinners[i].name}</li>`);
-   
-    $('.day-list').append(`<li class="day-list-item">Summary: ${dayWinners[i].summary}</li>`);
-    $('.day-list').append(`<li class="day-list-item">Difficulty: ${dayWinners[i].difficulty}</li>`);
-    $('.day-list').append(`<li class="day-list-item">Length: ${dayWinners[i]['length']}</li>`);
+    $('.day-list-container').append(`<ul class="day-list day-list${i+1}"></ul>`);
+    $(`.day-list${i+1}`).append(`<li class="day-list-item first-item">Option ${i+1} is a ${dayWinners[i].category} trail</li>`);
+    $(`.day-list${i+1}`).append(`<li class="day-list-item">Trail Name: ${dayWinners[i].name}</li>`);  
+    $(`.day-list${i+1}`).append(`<li class="day-list-item">Summary: ${dayWinners[i].summary}</li>`);
+    $(`.day-list${i+1}`).append(`<li class="day-list-item">Difficulty: ${dayWinners[i].difficulty}</li>`);
+    $(`.day-list${i+1}`).append(`<li class="day-list-item">Length: ${dayWinners[i]['length']}</li>`);
     
  }//end of for loop
     
@@ -85,6 +86,7 @@ function displayNightResults(nightWinners){
       $('.results').removeClass('js-hidden');   
       $('.results-header').removeClass('js-hidden'); 
       $('.results-night').removeClass('js-hidden'); 
+      $('.main').addClass('main-background-wider');
       $('.results-night').empty()
       $('.results-night').addClass('border');
       $('.results-night').append(`<h3>Your Night Activities</h3>`);
@@ -349,9 +351,18 @@ $('#event-form').submit(function(event){
     //clears day results on a new submit
     dayActivity = [];
 
+    //scroll to top after submit 
+   
+    scrollToTop();
+
     callAPIs(radiusDay, length, hiking,mtnbiking,dayCheck,nightCheck);
 });
     
+}
+
+function scrollToTop(){
+     //scroll to top after submit 
+     $("html, body").animate({ scrollTop:  $('#main').offset().top }, 'slow');
 }
 
 function watchLatLongFormSubmit(){
@@ -503,6 +514,9 @@ function displayNewBackground(){
    //$('section').css('margin-left','47%');
    $('.header').removeClass('header-start');
    $('.rotating-text').css('position','static');
+   $('.rotating-text__container__text').addClass('js-change-rotating-text');
+   $('.rotating-text__container__list__item').addClass('js-change-rotating-text');
+   $('.rotating-text__container__list').addClass('js-change-rotating-text-padding');
    $('.rotating-text').css('width','unset');
    $('.tagline').addClass('js-hidden');
      //$('.header').css('left','0');
@@ -519,6 +533,7 @@ function displayNewBackground(){
  
 
 $(start);
+$(scrollToTop);
 $(handleLearnMoreResults);
 $(handleLearnMoreSubmit);
 $(rollAgain);
