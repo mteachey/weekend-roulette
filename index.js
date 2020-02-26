@@ -56,7 +56,7 @@ function resultsRestaurant(results){
 
 function displayDayResults(dayWinners){
 //this function display the day results
-
+  $('.rotating-text').addClass('js-hidden');
   $('#activities-input').addClass('js-hidden');
   $('.main').addClass('main-background-wider');
   $('.results').removeClass('js-hidden');   
@@ -74,7 +74,7 @@ function displayDayResults(dayWinners){
     $(`.day-list${i+1}`).append(`<li class="day-list-item">Trail Name: ${dayWinners[i].name}</li>`);  
     $(`.day-list${i+1}`).append(`<li class="day-list-item">Summary: ${dayWinners[i].summary}</li>`);
     $(`.day-list${i+1}`).append(`<li class="day-list-item">Difficulty: ${dayWinners[i].difficulty}</li>`);
-    $(`.day-list${i+1}`).append(`<li class="day-list-item">Length: ${dayWinners[i]['length']}</li>`);
+    $(`.day-list${i+1}`).append(`<li class="day-list-item">Length: ${dayWinners[i]['length']}mi.</li>`);
     
  }//end of for loop
     
@@ -82,7 +82,7 @@ function displayDayResults(dayWinners){
 
 function displayNightResults(nightWinners){
     //this function display the night results
-    //this function will eventually render/display these results plus a start over button, home button, learn more button 
+     $('.rotating-text').addClass('js-hidden');
       $('.results').removeClass('js-hidden');   
       $('.results-header').removeClass('js-hidden'); 
       $('.results-night').removeClass('js-hidden'); 
@@ -90,19 +90,21 @@ function displayNightResults(nightWinners){
       $('.results-night').empty()
       $('.results-night').addClass('border');
       $('.results-night').append(`<h3>Your Night Activities</h3>`);
-      $('.results-night').append(`<ul class="night-list"></ul>`);
+      $('.results-night').append(`<div class="night-list-container"></div>`);
+      
      spinner.setAttribute('hidden', '');  
       
      for(let i=0; i < nightWinners.length; i++){
-
-       $('.night-list').append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
-      $('.night-list').append(`<li class="night-list-item">Name: ${nightWinners[i].restaurant.name}</li>`);
-      $('.night-list').append(`<li class="night-list-item link"><a href="${nightWinners[i].restaurant.url}" targe="_blank">Link: ${nightWinners[i].restaurant.url}</a></li>`);
-      $('.night-list').append(`<li class="night-list-item">Address: ${nightWinners[i].restaurant.location.address}</li>`);
+        $('.night-list-container').append(`<ul class="night-list night-list${i+1}"></ul>`);
+       $(`.night-list${i+1}`).append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item">Name: ${nightWinners[i].restaurant.name}</li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item><a class="link" href="${nightWinners[i].restaurant.url}" targe="_blank">Link: ${nightWinners[i].restaurant.url}</a></li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item">Address: ${nightWinners[i].restaurant.location.address}</li>`);
       
-      $('.night-list').append(`<li class="night-list-item">Cuisine: ${nightWinners[i].restaurant.cuisines}</li>`);
-      $('.night-list').append(`<li class="night-list-item">Average Cost for Two People: $${nightWinners[i].restaurant.average_cost_for_two}</li>`);
-      $('.night-list').append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item">Cuisine: ${nightWinners[i].restaurant.cuisines}</li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item">Average Cost for Two People: $${nightWinners[i].restaurant.average_cost_for_two}</li>`);
+      if(nightWinners[i].restaurant.featured_image != undefined){
+      $(`.night-list${i+1}`).append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);};
        
      }//end of for loop
        
@@ -121,7 +123,7 @@ function displayActivityForm(latitude,longitude,city, state){
     $('#location-input').addClass('js-hidden');
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
-    $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check your spelling.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p>`);
+    $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check the spelling of your city.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p>`);
     console.log(`displayActivityForm ran`)
 }
 
@@ -384,7 +386,7 @@ function watchLatLongFormSubmit(){
 }
 
 function resetLocation(){
-    $('#reset-location').on('click', function() { 
+    $('#reset-location-button').on('click', function() { 
         $('#location-input').removeClass('js-hidden');
         $('#intro').removeClass('js-hidden');
         $('#activities-input').addClass('js-hidden');
@@ -414,7 +416,7 @@ function start(){
     $('.start-button').on('click',function(){
         event.preventDefault();
         $('#start-screen').addClass('js-hidden');
-        
+        $('.rotating-text').removeClass('js-hidden');
         $('#intro').addClass('js-hidden');
         $('#location-input').removeClass('js-hidden');
         displayNewBackground();
@@ -477,6 +479,7 @@ function displayIntrowithResults(){
 };
 
 function resetDisplay(){
+    $('.rotating-text').removeClass('js-hidden');
     $('.results').addClass('js-hidden');
     $('#activities-input').addClass('js-hidden');
     $('.results-header').addClass('js-hidden');;

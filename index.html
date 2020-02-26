@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1"> 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Bungee+Shade|Comfortaa|Limelight|Monoton|Rammetto+One|Righteous|Vast+Shadow&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa|Marcellus|Noto+Serif+TC|Quattrocento|Squada+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
         <link rel="stylesheet" href="main.css">
     </head>
@@ -27,8 +28,8 @@
                     Will you
                   </p>                 
                   <ul class="rotating-text__container__list">
-                    <li class="rotating-text__container__list__item">hike?</li>
-                    <li class="rotating-text__container__list__item">bike?</li>
+                    <li class="rotating-text__container__list__item">go hiking?</li>
+                    <li class="rotating-text__container__list__item">go biking?</li>
                     <li class="rotating-text__container__list__item">eat pizza?</li>
                     <li class="rotating-text__container__list__item">eat Thai?</li>
                     <li class="rotating-text__container__list__item hidden-mobile">get muddy?</li>
@@ -40,7 +41,7 @@
         
         </header> 
         <section id="start-screen" class="start-screen">
-            <button id="start" class="white-button start-button" type="submit">Let's Do This!</button>
+            <button id="start" class="start-button" type="submit">Let's Do This!</button>
             <button id="learnmore-intro" class="grey-button learnmore-button" type="submit">Learn More</button>
         </section>
         
@@ -77,14 +78,17 @@
           </div>
             <h2>Let's Get You Something To Do!</h2>
             <div class="location-result"></div>
-            <button id="reset-location" type="submit" class="white-button">Search New Location</button>
+            <button id="reset-location-button" class="grey-button" type="submit" >Search New Location</button>
             <form id="event-form">
-                <fieldset name="day-activities">
+                <fieldset name="day-activities" class="field-set-with-checkboxes">
                     <legend>Day Activities</legend>
+                    <div class="checkbox-container">
                     <label for="day" class="main-label">I want day activities</label>
                     <input type="checkbox" id="day" name="day" checked><br>
+                    <span class="checkmark"></span>
+                    </div>
                     <div class="options">
-                        <p class="min-padding">My Options</p>
+                        <p class="center-underline-heading">My Options</p>
                         <label for="radius-day">Search Radius (mi)</label>
                         <input type="number" name="radius-day" id="radius-day" placeholder="20" value="20"><br> 
                         <label for="min-length">Min. Length of Trail (mi)</label>
@@ -96,13 +100,13 @@
                         <p class="note">At this time, our day activities are hiking and mountain biking. Please uncheck "I want day activities" if you know you don't have these activities near the city you are searching or if increasing your radius is still not finding any trails.</p>   
                     </div>
                 </fieldset>
-                <fieldset name="night-activities">
+                <fieldset name="night-activities" class="field-set-with-checkboxes">
                     <legend>Night Activities</legend>
                     <label for="day" class="main-label">I want evening activities</label>
                         <input type="checkbox" id="night" name="night" checked><br>
                     <p class="note">At this time, there are no options you can select for the evening activities - it really is a spin of the wheel to see where you are going to be eating dinner!</p>
                 </fieldset>         
-                <button type="submit" class="white-button">Spin the Wheel</button>
+                <button type="submit" >Spin the Wheel</button>
                 <p class="note">Sometimes, I need a little extra time to find your best restaurant selections.</p>
             </form>
             <button id="learnmore-activities" class="grey-button" type="submit">Learn More</button>
@@ -124,7 +128,7 @@
             <p class="intro-text">This app will take the deciding out of your play day - weekend, travel, or just playing hooky.  After providing us with your location and a few selections, you will "spin the wheel", to be given your activities for the day and evening.</p>
 
             <p class="intro-text">Because we still want to give you some choice (if you want it), you will be provided with two day time activities and two evening ones. At this time, the day time activities will be either a hiking trail, mountain biking trail or one of each and the evening activities will be restaurants.</p><p class="intro-text">Check back for version 2 with more activity types and better search features!</p> 
-            <button id="start-intro" class="white-button start-button" type="submit">Let's Do This!</button>
+            <button id="start-intro" class="start-button" type="submit">Let's Do This!</button>
             <button id="remove-intro" class="grey-button" type="submit">Ok-I got it.</button>
         </section>
         </main>
