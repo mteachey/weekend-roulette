@@ -83,9 +83,9 @@
                 <fieldset name="day-activities" class="field-set-with-checkboxes">
                     <legend>Day Activities</legend>
                     <div class="checkbox-container">
-                    <label for="day" class="main-label">I want day activities</label>
-                    <input type="checkbox" id="day" name="day" checked><br>
-                    <span class="checkmark"></span>
+                        <label for="day" class="main-label">I want day activities</label>
+                        <input type="checkbox" id="day" name="day" checked><br>
+                        <span class="checkmark"></span>
                     </div>
                     <div class="options">
                         <p class="center-underline-heading">My Options</p>
@@ -93,17 +93,26 @@
                         <input type="number" name="radius-day" id="radius-day" placeholder="20" value="20"><br> 
                         <label for="min-length">Min. Length of Trail (mi)</label>
                         <input type="number" name="min-length" id="min-length" placeholder="0" value="0"><br>
-                        <label for="hiking">I want hiking trails</label>
-                        <input type="checkbox" id="hiking" name="hiking" checked><br>
-                        <label for="mountain-biking">I want mountain biking trails</label>
-                        <input type="checkbox" id="mountain-biking" name="mountain-biking" checked>   
+                        <div class="checkbox-container">
+                            <label for="hiking">I want hiking trails</label>
+                            <input type="checkbox" id="hiking" name="hiking" checked><br>
+                            <span class="checkmark"></span>
+                        </div>
+                        <div class="checkbox-container">
+                            <label for="mountain-biking">I want mountain biking trails</label>
+                            <input type="checkbox" id="mountain-biking" name="mountain-biking" checked>   
+                            <span class="checkmark"></span>
+                        </div>
                         <p class="note">At this time, our day activities are hiking and mountain biking. Please uncheck "I want day activities" if you know you don't have these activities near the city you are searching or if increasing your radius is still not finding any trails.</p>   
                     </div>
                 </fieldset>
                 <fieldset name="night-activities" class="field-set-with-checkboxes">
                     <legend>Night Activities</legend>
-                    <label for="day" class="main-label">I want evening activities</label>
+                    <div class="checkbox-container">
+                        <label for="day" class="main-label">I want evening activities</label>
                         <input type="checkbox" id="night" name="night" checked><br>
+                        <span class="checkmark"></span>
+                    </div>
                     <p class="note">At this time, there are no options you can select for the evening activities - it really is a spin of the wheel to see where you are going to be eating dinner!</p>
                 </fieldset>         
                 <button type="submit" >Spin the Wheel</button>

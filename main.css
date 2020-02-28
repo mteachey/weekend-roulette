@@ -29,7 +29,7 @@ html {
 
 body{
     height: 100%;
-    min-height:700px;
+    min-height:1200px;
     width: 100%;
     margin-top: -20px;
    background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");
@@ -128,7 +128,7 @@ main{
 .header{
     width: 100%;
     margin: 1em auto;
-    margin-top:30px;
+    margin-top:0px;
     padding: 0px;
     font-size :8px;
     position:static;
@@ -226,7 +226,7 @@ label {
 }
 
 .main-label{
-    font-size: 26px;
+    font-size: 23px;
     text-align: center;
 }
 
@@ -940,7 +940,7 @@ input[type=checkbox]{
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
-    height:100px;
+    height:80px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -949,17 +949,23 @@ input[type=checkbox]{
 
   /* Hide the browser's default checkbox */
 .checkbox-container input {
+    z-index: 2;
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    height: 0;
-    width: 0;
+    height: 80px;
+    width: 80px;
+    margin: 0;
+    padding: 0px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
   
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    top: 61px;
+    top: 35px;
     left: 50%;
     border-radius: 5px;
     transform: translate(-50%, 0);

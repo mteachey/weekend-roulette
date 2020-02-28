@@ -98,7 +98,9 @@ function displayNightResults(nightWinners){
         $('.night-list-container').append(`<ul class="night-list night-list${i+1}"></ul>`);
        $(`.night-list${i+1}`).append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Name: ${nightWinners[i].restaurant.name}</li>`);
-      $(`.night-list${i+1}`).append(`<li class="night-list-item><a class="link" href="${nightWinners[i].restaurant.url}" targe="_blank">Link: ${nightWinners[i].restaurant.url}</a></li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item>
+         <a class="link" href="${nightWinners[i].restaurant.url}" target="_blank">Link: ${nightWinners[i].restaurant.url}</a>
+         </li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Address: ${nightWinners[i].restaurant.location.address}</li>`);
       
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Cuisine: ${nightWinners[i].restaurant.cuisines}</li>`);
