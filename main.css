@@ -734,11 +734,6 @@ section{
     width: 150px;
 }
 
-/*
-.night-list, .day-list {
-   width:46%;
-}*/
-
 .start-screen{
     flex-direction: row;
     align-items: center;
@@ -765,13 +760,13 @@ section{
 .header-start, .start-screen {
     position: fixed;
     left: 78%;
-    top: 25%;
+    top: 200px;
     transform: translate(-50%,-25%);
     min-height: 272px;
 }
 .start-screen {
     min-height: 0;
-    top: 72%;
+    top: 400px;
 }
 
 .header-start .title {
@@ -793,10 +788,7 @@ section{
     padding-left: 10%;
     left:54px;
   }
-/*
-.align-left-med{
-    text-align:left;
-}*/
+
 
 .main-background{
     width: 60%;

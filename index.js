@@ -168,14 +168,7 @@ function getLatLong(cityInput, stateInput){
 }
 
 function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
-    /*const params= {
-        lat: latitude,
-        lon: longitude,
-        maxDistance:radiusDay,
-        minLength: length,
-        maxResults:'100',
-        key: bikeKey,   
-        };*/
+ 
     const url = `${bikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${bikeKey}`;
     
    fetch(url)
@@ -216,14 +209,6 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
 }
 
 function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
-    /*const params= {
-        lat: latitude,
-        lon: longitude,
-        maxDistance:radiusDay,
-        minLength: length,
-        maxResults:'100',
-        key: hikeKey,   
-        };*/
     
     const url = `${hikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${hikeKey}`;
   
@@ -386,7 +371,6 @@ function watchLatLongFormSubmit(){
      event.preventDefault();
      let letters = /^[A-Za-z ]+$/;
      let city = $('#city').val();
-    //let state = 'california';
     let state = $('#state').val();
      if(city.match(letters)){
         getLatLong(city, state);
@@ -395,7 +379,7 @@ function watchLatLongFormSubmit(){
       {
       $('.alert-location').removeClass('js-hidden')
       }
-    // getLatLong(city, state);
+    
     });  
 }
 
@@ -421,8 +405,6 @@ function rollAgain(){
         $('.results-header').addClass('js-hidden');;
         $('.results-night').removeClass('border');
         $('.results-day').removeClass('border');
-        //$('.options').removeClass('js-hidden');
-        //resetDisplay();
     })
 }
 
@@ -442,28 +424,28 @@ function handleLearnMoreSubmit(){
         event.preventDefault();
         displayIntro();
         displayNewBackground();
-        console.log(`lm-intro click`);
-
+        
     })
     
     $('#learnmore-activities').on('click',function(){
         event.preventDefault();
         displayIntro();
-        console.log(`lm-act click`);
+       
     })
     $('#learnmore-location').on('click',function(){
         event.preventDefault();
         displayIntro();
-        console.log(`lm-loc click`);
+        
     })
     console.log(`handleLearnMoreSubmit ran`);
 }
 
 function handleLearnMoreResults(){
     $('#learnmore-results').on('click',function(){
+        
         event.preventDefault();
         displayIntrowithResults();
-        console.log(`lm-results click`);
+        
     })
 }
 
@@ -477,7 +459,7 @@ function displayIntro(){
         $('#activities-input').addClass('js-hidden');
         $('#start-intro').removeClass('js-hidden');
         $('#remove-intro').addClass('js-hidden');
-        console.log(`displayIntro ran`);
+        
 }
 
 function displayIntrowithResults(){
@@ -489,7 +471,7 @@ function displayIntrowithResults(){
     $('#activities-input').addClass('js-hidden');
     $('#start-intro').addClass('js-hidden');
     $('#remove-intro').removeClass('js-hidden');
-    console.log(`displayIntro ran`);
+    
 
 };
 
@@ -537,7 +519,6 @@ function displayNewBackground(){
    $('#location-input').addClass('js-fade-in');
    $('#start-screen').addClass('js-hidden');
    $('section').css('position','static'); 
-   //$('section').css('margin-left','47%');
    $('.header').removeClass('header-start');
    $('.rotating-text').css('position','static');
    $('.rotating-text__container__text').addClass('js-change-rotating-text');
@@ -545,7 +526,7 @@ function displayNewBackground(){
    $('.rotating-text__container__list').addClass('js-change-rotating-text-padding');
    $('.rotating-text').css('width','unset');
    $('.tagline').addClass('js-hidden');
-     console.log(`displayNewBackground ran`);
+     
  }
 
  
