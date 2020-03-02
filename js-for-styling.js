@@ -34,5 +34,5 @@ anime.timeline({loop: false})
     opacity: 0,
     duration: 2000,
     easing: "easeOutExpo",
-    delay: 1000
+    delay: 3000
   });

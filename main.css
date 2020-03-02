@@ -32,9 +32,6 @@ body{
     min-height:1200px;
     width: 100%;
     margin-top: -20px;
-   background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");
-   background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/hike-boots-girl.jpg");
-  background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/restaurant-sunlight.jpg");
     background-image:url("_images/roulette.jpg");
     background-position:center center;
     background-size:cover;
@@ -42,6 +39,19 @@ body{
     background-repeat: no-repeat; 
     color:#fff; 
 }
+/*
+.hike-background{
+    background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/hike-boots-girl.jpg");
+    transition:
+}
+
+.bike-background{
+    background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");  
+}
+
+.restaurant-background{
+    background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/restaurant-sunlight.jpg");
+}*/
 
 .mask {
     height: 2000px;
@@ -51,31 +61,49 @@ body{
     background-size:cover;
     background-attachment: fixed;
     background-repeat: no-repeat; 
+    animation-fill-mode: forwards;
+}
+
+.zindex{
+    z-index:-5;
 }
 
 .mask1{
     background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/mtnbike-bike.jpg");
     opacity:0;
+     
+}
+
+.animation-mask-1{
     animation: changeOpacity 20s linear infinite;
-    animation-delay:0s;
-    animation-fill-mode: forwards;
+    animation-delay:0s;  
 }
 
 .mask2{
     background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/restaurant-sunlight.jpg");
     opacity:0;
+}
+
+.animation-mask-2{
     animation: changeOpacity 20s linear infinite;
     animation-delay:5s;
-    animation-fill-mode: forwards;
 }
 
 .mask3{
     background-image: url("https://paintedskycreative.com/_external-images/weekend-roulette/hike-boots-girl.jpg");
     opacity:0;
-    animation: changeOpacity 20s linear infinite;
-    animation-delay:10s;
-    animation-fill-mode: forwards;
 }
+
+.animation-mask-3{
+    animation: changeOpacity 20s linear infinite;
+    animation-delay:5s;
+}
+
+.newbackground{
+  opacity:1;
+  transition:opacity 2s;
+}
+
 
 .mask4{
     background-color: rgba(0,0,0,.5);
@@ -595,8 +623,9 @@ li.first-item{
     height: 100px;
     overflow: hidden;
     font-size: 35px;
-    line-height: 40px;
+    line-height: 58px;
     width:100%;
+    min-width:350px;
 }
 .rotating-text__container {
     font-weight: 600;
@@ -701,6 +730,10 @@ section{
     margin-top:-10px;
 }
 
+#globe img, #spinner img {
+    width: 150px;
+}
+
 /*
 .night-list, .day-list {
    width:46%;
@@ -741,11 +774,21 @@ section{
     top: 72%;
 }
 
-.title {
+.header-start .title {
     font-size: 3.5em;
   }
 
 .rotating-text__container {
+    padding: 0;
+    padding-left: 6%;
+} 
+
+.main-background .rotating-text {
+    left: 12px;
+    transform: translate(0%, 21%);
+}
+
+.header-start .rotating-text__container {
     padding: 0 40px;
     padding-left: 10%;
     left:54px;
@@ -780,11 +823,15 @@ form{
     padding:20px;
 }
 
-
 fieldset{
     margin-bottom: 2em;
     display: block;    
 }
+
+.results-header h2 {
+    text-align: left;
+}
+
 /*
 
 legend{
@@ -852,7 +899,7 @@ input[type=checkbox]{
         0%   { left: -100px; }
         100% { left: 50%; }
       }
-    
+ /*   
 @-webkit-keyframes opacity {
     0%, 100% {
       opacity: 0;
@@ -863,34 +910,33 @@ input[type=checkbox]{
   }
   @-webkit-keyframes change {
     0%, 6%, 100% {
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0); 
       }
       10%, 16% {
-        transform: translate3d(0, -16.67%, 0);
+        transform: translate3d(0, -16.666667%, 0); 
       }
       20%, 26% {
-        transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0); 
       }
       30%, 36% {
-        transform: translate3d(0, -16.67%, 0);
+        transform: translate3d(0, -16.666667%, 0);
       }
       40%, 46% {
-        transform: translate3d(0, -83.33%, 0);
       }
       50%, 56% {
-        transform: translate3d(0, -66.67%, 0);
+        transform: translate3d(0, -66.666667%, 0); 
       }
       60%, 66% {
-          transform: translate3d(0, -33.33%, 0);
+          transform: translate3d(0, -33.333333%, 0); 
         }
       70%, 76% {
           transform: translate3d(0, -50%, 0);
         }
       80%, 86% {
-          transform: translate3d(0, -83.33%, 0);
+          transform: translate3d(0, -83.333333%, 0);
       }
       90%, 96% {
-          transform: translate3d(0, -33.33%, 0);
+          transform: translate3d(0, -33.333333%, 0);
       }
   }
   @-o-keyframes opacity {
@@ -903,34 +949,34 @@ input[type=checkbox]{
   }
   @-o-keyframes change {
     0%, 6%, 100% {
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0); 
       }
       10%, 16% {
-        transform: translate3d(0, -16.67%, 0);
+        transform: translate3d(0, -16.666667%, 0); 
       }
       20%, 26% {
-        transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0); 
       }
       30%, 36% {
-        transform: translate3d(0, -16.67%, 0);
+        transform: translate3d(0, -16.666667%, 0);
       }
       40%, 46% {
-        transform: translate3d(0, -83.33%, 0);
+        transform: translate3d(0, -83.333333%, 0); 
       }
       50%, 56% {
-        transform: translate3d(0, -66.67%, 0);
+        transform: translate3d(0, -66.666667%, 0); 
       }
       60%, 66% {
-          transform: translate3d(0, -33.33%, 0);
+          transform: translate3d(0, -33.333333%, 0); 
         }
       70%, 76% {
           transform: translate3d(0, -50%, 0);
         }
       80%, 86% {
-          transform: translate3d(0, -83.33%, 0);
+          transform: translate3d(0, -83.333333%, 0);
       }
       90%, 96% {
-          transform: translate3d(0, -33.33%, 0);
+          transform: translate3d(0, -33.333333%, 0);
       }
   }
   @-moz-keyframes opacity {
@@ -943,36 +989,36 @@ input[type=checkbox]{
   }
   @-moz-keyframes change {
     0%, 6%, 100% {
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0); 
       }
       10%, 16% {
-        transform: translate3d(0, -16.67%, 0);
+        transform: translate3d(0, -16.666667%, 0); 
       }
       20%, 26% {
-        transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0); 
       }
       30%, 36% {
-        transform: translate3d(0, -16.67%, 0);
+        transform: translate3d(0, -16.666667%, 0);
       }
       40%, 46% {
-        transform: translate3d(0, -83.33%, 0);
+        transform: translate3d(0, -83.333333%, 0); 
       }
       50%, 56% {
-        transform: translate3d(0, -66.67%, 0);
+        transform: translate3d(0, -66.666667%, 0); 
       }
       60%, 66% {
-          transform: translate3d(0, -33.33%, 0);
+          transform: translate3d(0, -33.333333%, 0); 
         }
       70%, 76% {
           transform: translate3d(0, -50%, 0);
         }
       80%, 86% {
-          transform: translate3d(0, -83.33%, 0);
+          transform: translate3d(0, -83.333333%, 0);
       }
       90%, 96% {
-          transform: translate3d(0, -33.33%, 0);
+          transform: translate3d(0, -33.333333%, 0);
       }
-  }
+  }*/
   @keyframes opacity {
     0%, 100% {
       opacity: 0;
@@ -984,37 +1030,36 @@ input[type=checkbox]{
 
   @keyframes change {
     0%, 6%, 100% {
-      transform: translate3d(0, 0, 0);
-    }
-    10%, 16% {
-      transform: translate3d(0, -16.67%, 0);
-    }
-    20%, 26% {
-      transform: translate3d(0, -50%, 0);
-    }
-    30%, 36% {
-      transform: translate3d(0, -16.67%, 0);
-    }
-    40%, 46% {
-      transform: translate3d(0, -83.33%, 0);
-    }
-    50%, 56% {
-      transform: translate3d(0, -66.67%, 0);
-    }
-    60%, 66% {
-        transform: translate3d(0, -33.33%, 0);
+        transform: translate3d(0, 0, 0); /*hiking*/
       }
-    70%, 76% {
-        transform: translate3d(0, -50%, 0);
+      10%, 16% {
+        transform: translate3d(0, -20%, 0); /*biking*/
       }
-    80%, 86% {
-        transform: translate3d(0, -83.33%, 0);
-    }
-    90%, 96% {
-        transform: translate3d(0, -33.33%, 0);
-    }
+      20%, 26% {
+        transform: translate3d(0, -60%, 0); /*thai*/
+      }
+      30%, 36% {
+        transform: translate3d(0, -20%, 0);
+      }
+      40%, 46% {
+        transform: translate3d(0, 0%, 0); /*fast*/
+      }
+      50%, 56% {
+        transform: translate3d(0, -80%, 0); /*muddy*/
+      }
+      60%, 66% {
+          transform: translate3d(0, -40%, 0); /*pizza*/
+        }
+      70%, 76% {
+          transform: translate3d(0, -60%, 0);
+        }
+      80%, 86% {
+          transform: translate3d(0, -80%, 0);
+      }
+      90%, 96% {
+          transform: translate3d(0, -40%, 0);
+      }
   }
-
 
 
 .checkbox-container {

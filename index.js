@@ -56,8 +56,11 @@ function resultsRestaurant(results){
 
 function displayDayResults(dayWinners, nightCheck){
 //this function display the day results
+  $('body').addClass('bike-background');
   $('.rotating-text').addClass('js-hidden');
   $('#activities-input').addClass('js-hidden');
+  $('.mask2').removeClass('newbackground');
+  $('.mask3').addClass('newbackground');
   $('.main').addClass('main-background-wider');
   $('.results').removeClass('js-hidden');   
   $('.results-header').removeClass('js-hidden'); 
@@ -84,6 +87,9 @@ function displayDayResults(dayWinners, nightCheck){
 
 function displayNightResults(nightWinners){
     //this function display the night results
+    $('body').addClass('bike-background');
+    $('.mask2').removeClass('newbackground');
+    $('.mask3').addClass('newbackground');
      $('.rotating-text').addClass('js-hidden');
       $('.results').removeClass('js-hidden');   
       $('.results-header').removeClass('js-hidden'); 
@@ -124,7 +130,10 @@ function formatLatLong(locationResult, city, state){
 
 function displayActivityForm(latitude,longitude,city, state){
     scrollToTop();
+    $('.mask1').removeClass('newbackground');
+    $('.mask2').addClass('newbackground');
     $('#activities-input').addClass('js-fade-in');
+    
     $('#location-input').addClass('js-hidden');
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
@@ -159,14 +168,14 @@ function getLatLong(cityInput, stateInput){
 }
 
 function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
-    const params= {
+    /*const params= {
         lat: latitude,
         lon: longitude,
         maxDistance:radiusDay,
         minLength: length,
         maxResults:'100',
         key: bikeKey,   
-        };
+        };*/
     const url = `${bikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${bikeKey}`;
     
    fetch(url)
@@ -207,14 +216,14 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
 }
 
 function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
-    const params= {
+    /*const params= {
         lat: latitude,
         lon: longitude,
         maxDistance:radiusDay,
         minLength: length,
         maxResults:'100',
         key: hikeKey,   
-        };
+        };*/
     
     const url = `${hikeEndPoint}?lat=${latitude}&lon=${longitude}&maxDistance=${radiusDay}&minLength=${length}&maxResults=100&key=${hikeKey}`;
   
@@ -459,6 +468,7 @@ function handleLearnMoreResults(){
 }
 
 function displayIntro(){   
+        scrollToTop();
         $('#intro').removeClass('js-hidden');
         $('#start-screen').addClass('js-hidden');
         $('.rotating-text').addClass('js-hidden');
@@ -476,7 +486,6 @@ function displayIntrowithResults(){
     $('#start-screen').addClass('js-hidden');
     $('.rotating-text').addClass('js-hidden');
     $('#location-input').addClass('js-hidden');
-   // $('.results').addClass('js-hidden');
     $('#activities-input').addClass('js-hidden');
     $('#start-intro').addClass('js-hidden');
     $('#remove-intro').removeClass('js-hidden');
@@ -516,7 +525,13 @@ function handleNoDayChecked() {
 
 function displayNewBackground(){
     scrollToTop();
-   $('.mask').addClass('js-hidden');
+   $('.mask-solid').addClass('js-hidden');
+   $('.mask1').removeClass('animation-mask-1');
+   $('.mask2').removeClass('animation-mask-2');
+   $('.mask3').removeClass('animation-mask-3');
+   $('.mask1').addClass('newbackground');
+   $('.mask').addClass('zindex');
+   $('body').css('background-image','none');
     $('main').addClass('main-background');
    $('#location-input').removeClass('js-slide-in');
    $('#location-input').addClass('js-fade-in');
