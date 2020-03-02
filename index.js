@@ -64,7 +64,7 @@ function displayDayResults(dayWinners){
   $('.results-day').removeClass('js-hidden'); 
   $('.results-day').empty();
   $('.results-day').addClass('border');
-  $('.results-day').append(`<h3>Your Day Activities</h3>`);
+  $('.results-day').append(`<h3>Day Activities</h3>`);
   $('.results-day').append(`<div class="day-list-container"></div>`);
   
   
@@ -89,7 +89,7 @@ function displayNightResults(nightWinners){
       $('.main').addClass('main-background-wider');
       $('.results-night').empty()
       $('.results-night').addClass('border');
-      $('.results-night').append(`<h3>Your Night Activities</h3>`);
+      $('.results-night').append(`<h3>Night Activities</h3>`);
       $('.results-night').append(`<div class="night-list-container"></div>`);
       
      spinner.setAttribute('hidden', '');  
@@ -98,13 +98,12 @@ function displayNightResults(nightWinners){
         $('.night-list-container').append(`<ul class="night-list night-list${i+1}"></ul>`);
        $(`.night-list${i+1}`).append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Name: ${nightWinners[i].restaurant.name}</li>`);
-      $(`.night-list${i+1}`).append(`<li class="night-list-item>
-         <a class="link" href="${nightWinners[i].restaurant.url}" target="_blank">Link: ${nightWinners[i].restaurant.url}</a>
-         </li>`);
+      
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Address: ${nightWinners[i].restaurant.location.address}</li>`);
       
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Cuisine: ${nightWinners[i].restaurant.cuisines}</li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Average Cost for Two People: $${nightWinners[i].restaurant.average_cost_for_two}</li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item"><a class="link" href="${nightWinners[i].restaurant.url}" target="_blank">More Info</a></li>`);
       if(nightWinners[i].restaurant.featured_image != undefined){
       $(`.night-list${i+1}`).append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);};
        
@@ -469,6 +468,7 @@ function displayIntro(){
 
 function displayIntrowithResults(){
     $('#intro').removeClass('js-hidden');
+    $('#intro').addClass('intro-with-results');
     $('#start-screen').addClass('js-hidden');
     $('.rotating-text').addClass('js-hidden');
     $('#location-input').addClass('js-hidden');
@@ -506,6 +506,7 @@ function handleNoDayChecked() {
  function handleRemoveIntro(){
     $('#remove-intro').on('click', event => {
      $('#intro').addClass('js-hidden');
+     $('#intro').removeClass('intro-with-results');
     });
  } 
 

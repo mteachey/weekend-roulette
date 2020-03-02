@@ -97,13 +97,17 @@ h1, h2, h3{
 h1{
     font-size:2.5rem;
     font-family: 'Monoton', cursive;
-    text-shadow: 2px 2px #ff3300;
+    text-shadow: 2px 2px #fe0058;
 }
 
-h2,h3{
+h2{
 /*font-family: 'Squada One';
 font-family: 'Marcellus' ;*/
 font-size:1.75rem;
+}
+
+h3{
+    font-size:1.4rem;
 }
 
 p{
@@ -118,7 +122,7 @@ main{
 
 .main-background{                       /*this is after the start screen*/
     background-color:rgba(0,0,0,.85);
-    width: 90%;
+    width: 94%;
     margin: auto;  
     padding-bottom:20px;
     transition: 2s background-color;
@@ -135,6 +139,7 @@ main{
     display:flex;
     flex-direction: column;
     align-items:center;
+    padding-top: 25px;
 }
 
 .header-start{              /*header for start screen*/
@@ -159,6 +164,11 @@ section {
     transition:2s left;
     margin:auto;
     margin-top:-45px;
+    width:96%;
+}
+
+.intro-with-results{
+    margin-top:0;
 }
 
 .transparent{
@@ -206,6 +216,10 @@ fieldset{
 
 label, input, button {  
     margin-top:15px;
+}
+
+button:hover, input:hover{
+    cursor:pointer;
 }
 
 legend{
@@ -288,10 +302,11 @@ select{
 .select-css:hover {
     border-color: #888;
 }
-.select-css:focus {
+
+.select-css:focus, input:focus, button:focus,.checkbox-container input:focus ~ .checkmark {
     border-color: #aaa;
-    box-shadow: 0 0 1px 3px rgba(55,0,216, .7);
-    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    box-shadow: 0 0 3px 6px rgba(55,0,216, 1);
+    box-shadow: 0 0 0 8px -moz-mac-focusring;
     color: #222; 
     outline: none;
 }
@@ -381,7 +396,7 @@ border-bottom: 1px #fff solid;
 }
 
 .border{
-    border: 6px double #3700d8;
+    border: 6px double #fe0058;
 }
 
 li {
@@ -393,7 +408,7 @@ li.first-item{
 }
 
 .link{
-    font-size:16px;
+    color:#fff;
     word-break: break-all;
 }
 
@@ -623,55 +638,119 @@ li.first-item{
 .js-change-rotating-text-padding{       /*for all screens but start*/
     padding-left:119px;
 }
- 
-/*@media only screen and (min-width:960px){
 
+@media only screen and (min-width:760px){
+.header-start {
+   top: 75px;
+   width:600px;
+   min-height: 300px;
+}
+
+.header {
+    font-size: 12px;
+    padding-top: 35px;
+}
+
+.start-screen{
+    top:375px;
+}
+.rotating-text__container {
+    padding: 0 126px;
+}
+input, label,select{
+    width: 350px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+input,select{
+    margin-top: 6px;
+    margin-bottom: 15px;
+}
+
+.note {
+    margin: auto;
+    margin-block-start: 10px;
+    max-width: 350px;
+} 
+fieldset {
+    min-width: 500px;
+}
+.results-header{
+padding-bottom: 20px;
+}
+
+button{
+    font-size:22px;
+}
+
+}/*end MQ 760*/
+
+@media only screen and (min-width:1190px){
+ .night-list, .day-list{
+    width:46%;   
+ }
+
+ .night-list1, .day-list1 {
+    border-bottom: 0px #fff solid;
+}
+section{
+    margin-top:-10px;
+}
+
+/*
 .night-list, .day-list {
    width:46%;
-}
+}*/
 
 .start-screen{
     flex-direction: row;
     align-items: center;
+    width:600px;
 } 
-/******/
-/*
-h1, h2, h3{
-    font-family: ;
-    margin-block-start:1rem;
+
+.start-screen button {
+    margin: 0;
 }
 
 .header{
     text-align:left;
     flex-direction: row;
     align-items:center;
+    padding-left: 20px;
+    width:96%;
+}
+
+.header-start{
     padding-left: 5%;
+    width:600px;
 }
 
 .header-start, .start-screen {
     position: fixed;
-    left: 83%;
+    left: 78%;
     top: 25%;
     transform: translate(-50%,-25%);
-    min-height: 288px;
+    min-height: 272px;
 }
 .start-screen {
-    min-height: none;
+    min-height: 0;
     top: 72%;
 }
 
 .title {
-    font-size: 3em;
+    font-size: 3.5em;
   }
 
 .rotating-text__container {
     padding: 0 40px;
-    padding-left: 20px;
+    padding-left: 10%;
+    left:54px;
   }
-
+/*
 .align-left-med{
     text-align:left;
-}
+}*/
 
 .main-background{
     width: 60%;
@@ -703,6 +782,7 @@ fieldset{
     margin-bottom: 2em;
     display: block;    
 }
+/*
 
 legend{
     margin-bottom: 0px;
@@ -730,8 +810,8 @@ input[type=checkbox]{
 .hidden-mobile{
     display: block;
 }
-
-}*//*end MQ960*/
+*/
+} /*end MQ960*/
 
 /****KEYFRAMES****/
        /* Spinning the sphere using key frames */
