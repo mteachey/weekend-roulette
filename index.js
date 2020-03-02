@@ -59,8 +59,8 @@ function displayDayResults(dayWinners, nightCheck){
   $('body').addClass('bike-background');
   $('.rotating-text').addClass('js-hidden');
   $('#activities-input').addClass('js-hidden');
-  $('.mask2').removeClass('newbackground');
-  $('.mask3').addClass('newbackground');
+  $('.mask1').removeClass('newbackground');
+  $('.mask2').addClass('newbackground');
   $('.main').addClass('main-background-wider');
   $('.results').removeClass('js-hidden');   
   $('.results-header').removeClass('js-hidden'); 
@@ -88,8 +88,8 @@ function displayDayResults(dayWinners, nightCheck){
 function displayNightResults(nightWinners){
     //this function display the night results
     $('body').addClass('bike-background');
-    $('.mask2').removeClass('newbackground');
-    $('.mask3').addClass('newbackground');
+    $('.mask1').removeClass('newbackground');
+    $('.mask2').addClass('newbackground');
      $('.rotating-text').addClass('js-hidden');
       $('.results').removeClass('js-hidden');   
       $('.results-header').removeClass('js-hidden'); 
@@ -130,8 +130,9 @@ function formatLatLong(locationResult, city, state){
 
 function displayActivityForm(latitude,longitude,city, state){
     scrollToTop();
-    $('.mask1').removeClass('newbackground');
-    $('.mask2').addClass('newbackground');
+    $('body').css('background-image','none');
+    //$('.mask1').removeClass('newbackground');
+    //$('.mask2').addClass('newbackground');
     $('#activities-input').addClass('js-fade-in');
     
     $('#location-input').addClass('js-hidden');
@@ -513,7 +514,7 @@ function displayNewBackground(){
    $('.mask3').removeClass('animation-mask-3');
    $('.mask1').addClass('newbackground');
    $('.mask').addClass('zindex');
-   $('body').css('background-image','none');
+   //$('body').css('background-image','none');
     $('main').addClass('main-background');
    $('#location-input').removeClass('js-slide-in');
    $('#location-input').addClass('js-fade-in');
