@@ -174,12 +174,14 @@ section {
 .transparent{
     opacity:0;
     transition:2s opacity;
+    visibility: hidden;
 }
 
 section.fade-in{
     opacity:1;
     transition: 1s opacity;
     transition-delay:1s;
+    visibility:visible ;
 }
 
 .start-screen{                               /*button row on start screen*/
@@ -468,6 +470,7 @@ li.first-item{
 
 .js-fade-in{
   opacity:1;
+  visibility:visible ;
 }
 
 .js-section-hidden{

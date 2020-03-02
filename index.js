@@ -16,7 +16,7 @@ const latLongEndPoint = 'https://api.opencagedata.com/geocode/v1/json';
 
 let dayActivity = [];
 
-function resultsHikingOrBiking(responseJson,pick){
+function resultsHikingOrBiking(responseJson,pick, nightCheck){
     let numberOfResults = responseJson.trails.length;
     for (let i=0; i<numberOfResults; i++ ){
        dayActivity.push(responseJson.trails[i]);
@@ -24,11 +24,11 @@ function resultsHikingOrBiking(responseJson,pick){
     //only runs pickDayActivities when appropriate depending on if both hiking/biking checked
     if (pick)
     {
-         pickDayActivities(dayActivity);
+         pickDayActivities(dayActivity, nightCheck);
     }    
 }
 
-function pickDayActivities(dayActivity){
+function pickDayActivities(dayActivity,nightCheck){
     let dayActivityOneNumber = Math.floor(Math.random() * (dayActivity.length));
     let dayActivityTwoNumber = Math.floor(Math.random() * (dayActivity.length));
     while(dayActivityTwoNumber === dayActivityOneNumber){
@@ -38,7 +38,7 @@ function pickDayActivities(dayActivity){
     let dayWinners =[];
     dayWinners = [dayActivity[dayActivityOneNumber],dayActivity[dayActivityTwoNumber]];
    
-    displayDayResults(dayWinners);
+    displayDayResults(dayWinners, nightCheck);
 }
 
 function resultsRestaurant(results){
@@ -54,7 +54,7 @@ function resultsRestaurant(results){
  
 }
 
-function displayDayResults(dayWinners){
+function displayDayResults(dayWinners, nightCheck){
 //this function display the day results
   $('.rotating-text').addClass('js-hidden');
   $('#activities-input').addClass('js-hidden');
@@ -67,7 +67,6 @@ function displayDayResults(dayWinners){
   $('.results-day').append(`<h3>Day Activities</h3>`);
   $('.results-day').append(`<div class="day-list-container"></div>`);
   
-  
  for(let i=0; i < dayWinners.length; i++){
     $('.day-list-container').append(`<ul class="day-list day-list${i+1}"></ul>`);
     $(`.day-list${i+1}`).append(`<li class="day-list-item first-item">Option ${i+1} is a ${dayWinners[i].category} trail</li>`);
@@ -75,6 +74,9 @@ function displayDayResults(dayWinners){
     $(`.day-list${i+1}`).append(`<li class="day-list-item">Summary: ${dayWinners[i].summary}</li>`);
     $(`.day-list${i+1}`).append(`<li class="day-list-item">Difficulty: ${dayWinners[i].difficulty}</li>`);
     $(`.day-list${i+1}`).append(`<li class="day-list-item">Length: ${dayWinners[i]['length']}mi.</li>`);
+    if(nightCheck === 'no'){
+        spinner.setAttribute('hidden', ''); 
+    }
     
  }//end of for loop
     
@@ -121,6 +123,8 @@ function formatLatLong(locationResult, city, state){
 }
 
 function displayActivityForm(latitude,longitude,city, state){
+    scrollToTop();
+    $('#activities-input').addClass('js-fade-in');
     $('#location-input').addClass('js-hidden');
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
@@ -173,7 +177,7 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
-        //spinner.removeAttribute('hidden');
+        spinner.removeAttribute('hidden');
          let numberOfResults = responseJson.trails.length;
          if(numberOfResults < 2){
             //$('#js-error-message').text(`Sorry, it looks like we didn't find any bikes or hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes and/or hikes. `)
@@ -184,11 +188,11 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
                     responseJson.trails[i].category = 'bike';
                 }
                 if(hikingAlso){
-                    resultsHikingOrBiking(responseJson, false); 
+                    resultsHikingOrBiking(responseJson, false,nightCheck); 
                     getHikes(radiusDay,length, true, nightCheck);
                 }
                 else{
-                    resultsHikingOrBiking(responseJson, true);
+                    resultsHikingOrBiking(responseJson, true, nightCheck);
                     
                 
                     if(nightCheck === 'yes') {
@@ -223,7 +227,7 @@ function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
-      //  spinner.removeAttribute('hidden');
+        spinner.removeAttribute('hidden');
         let numberOfResults = responseJson.trails.length;
         if(numberOfResults < 2){
             //$('#js-error-message').text(`Sorry, it looks like we didn't find any hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck hikes. `)
@@ -234,7 +238,7 @@ function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
                 responseJson.trails[i].category = 'hiking';
             }
             
-            resultsHikingOrBiking(responseJson, true);
+            resultsHikingOrBiking(responseJson, true, nightCheck);
             
             if(nightCheck==='yes')
             {getAllRestaurants();}
@@ -408,7 +412,7 @@ function rollAgain(){
         $('.results-header').addClass('js-hidden');;
         $('.results-night').removeClass('border');
         $('.results-day').removeClass('border');
-        $('.options').removeClass('js-hidden');
+        //$('.options').removeClass('js-hidden');
         //resetDisplay();
     })
 }
@@ -511,6 +515,7 @@ function handleNoDayChecked() {
  } 
 
 function displayNewBackground(){
+    scrollToTop();
    $('.mask').addClass('js-hidden');
     $('main').addClass('main-background');
    $('#location-input').removeClass('js-slide-in');
@@ -525,29 +530,25 @@ function displayNewBackground(){
    $('.rotating-text__container__list').addClass('js-change-rotating-text-padding');
    $('.rotating-text').css('width','unset');
    $('.tagline').addClass('js-hidden');
-     //$('.header').css('left','0');
-   /*  $('.header').css('font-size','10px');
-     $('.header').css('padding','3px');
-     $('.rotating-text').addClass('js-hidden');
-        $('.header').css("top", "15px");
-        $('.header').css("height", "125px");
-        $('.header').css("position", "absolute");*
-      //  $('.header').css("color", "#000");*/
      console.log(`displayNewBackground ran`);
  }
 
  
+function handleWeekendRoulette(){
+    start();
+    scrollToTop();
+    handleLearnMoreResults();
+    handleLearnMoreSubmit();
+    rollAgain();
+    watchActivityFormSubmit();
+    resetLocation();
+    start();
+    handleNoDayChecked();
+    handleRemoveIntro();
+    handleCloseButton();
+    watchLatLongFormSubmit();
+}
 
-$(start);
-$(scrollToTop);
-$(handleLearnMoreResults);
-$(handleLearnMoreSubmit);
-$(rollAgain);
-$(watchActivityFormSubmit);
-$(resetLocation);
-$(start);
-$(handleNoDayChecked);
-$(handleRemoveIntro);
-$(handleCloseButton);
-$(watchLatLongFormSubmit);
+// when the page loads, call `handleWeekendRoulette`
+$(handleWeekendRoulette);
 
