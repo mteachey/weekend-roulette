@@ -138,7 +138,7 @@ function displayActivityForm(latitude,longitude,city, state){
     $('#location-input').addClass('js-hidden');
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
-    $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check the spelling of your city.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p>`);
+    $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check the spelling of your city.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p><p class="note">Please know, if you mistakenly misspelled the city or selected the wrong state, we will find the closest match to what you entered.</p>`);
     console.log(`displayActivityForm ran`)
 }
 

@@ -176,7 +176,7 @@ main{
     left: 50%;
     top: 30px;
     transform: translate(-50%,0%);
-    min-height: 335px;   /*need for rotating text*/
+    /*min-height: 335px; */  /*need for rotating text*/
     font-size:15px;
     margin-left:0;
     width: 360px;  /*so the title dislays on two lines*/
@@ -203,6 +203,7 @@ section {
     opacity:0;
     transition:2s opacity;
     visibility: hidden;
+    height:0;
 }
 
 section.fade-in{
@@ -468,12 +469,18 @@ li.first-item{
     width: 225px;
     border-radius: 5px;
     border: 1px solid #fff;
+    margin: auto;
+    display: block;
 }
 
 .note {
     font-style: italic;
     font-size: 17px;
     margin-block-start: 10px;
+}
+
+.location-result .note {
+    margin-bottom: 22px;
 }
 
 .text-align-center{
@@ -499,6 +506,7 @@ li.first-item{
 .js-fade-in{
   opacity:1;
   visibility:visible ;
+  height:auto;
 }
 
 .js-section-hidden{
@@ -619,37 +627,34 @@ li.first-item{
 }
 
 .header-start .rotating-text{
-    left: 15px;
-    transform: translate(0%, 0%);
+    margin-top: .5em;
 }
 
 .rotating-text {
-    position: absolute;
-    bottom: 0%;
-    left: 27px;
-    transform: translate(9%, 0%);
+    position: relative;
     height: 100px;
     overflow: hidden;
-    font-size: 32px;
+    font-size: 27px;
     line-height: 58px;
     width:100%;
-    min-width:350px;
+    min-width:320px;
+    margin-top: .25em;
 }
 .rotating-text__container {
     font-weight: 600;
     overflow: hidden;
-    height: 58px;    
-    padding: 0 12px;
+    height: 58px;   
+    display: flex;
+    justify-content: center; 
 }
 
 .rotating-text__container__text {
-    display: inline;
-    float: left;
+    display: block;
     margin: 0;
 }
 .rotating-text__container__list {
     margin-top: 0;
-    padding-left: 137px;
+    padding-left: 10px;
     text-align: left;
     list-style: none;
     -webkit-animation-name: change;
@@ -660,9 +665,9 @@ li.first-item{
     animation-iteration-count: infinite;
 }
 
-.rotating-text__container__text{            /*the will you*/
+.rotating-text__container__text{            /*the 'will you'*/
     line-height:58px;
-    font-size: 32px;
+    font-size: 27px;
 }
 
 .rotating-text__container__list__item {
@@ -670,14 +675,9 @@ li.first-item{
     margin: 0;
 }
 
-.js-change-rotating-text{
-    font-size:28px;
-    line-height:50px;
-}
-
-.js-change-rotating-text-padding{       /*for all screens but start*/
-    padding-left:119px;
-}
+/*.js-change-rotating-text-padding{       /*for all screens but start*/
+    /*padding-left:119px;
+}*/
 
 @media only screen and (min-width:540px){
 h1{
@@ -691,13 +691,43 @@ font-size:1.75rem;
 h3{
     font-size:1.4rem;
 }
+
+.rotating-text {
+    min-width:350px;
+}
+
+.rotating-text__container__text {
+    font-size: 32px;
+}
+
+.rotating-text {
+    font-size: 32px;
+}
+
+.js-change-rotating-text{
+    font-size:28px;
+    line-height:50px;
+}
+
+.header-start .title{
+    font-size:3.25em;
+    margin:0;
+}
+
+.title {
+    font-size: 2rem;
+    margin-top:20px;
+}
+  
+
+
 }
 
 @media only screen and (min-width:760px){
 .header-start {
    top: 75px;
    width:600px;
-   min-height: 300px;
+  /* min-height: 300px;*/
 }
 
 .header {
@@ -705,14 +735,14 @@ h3{
     padding-top: 35px;
 }
 .title {
-   font-size: 1.75rem;
+   font-size: 2.25rem;
 }
 
 .start-screen{
-    top:375px;
+    top:310px;
 }
 .rotating-text__container {
-    padding: 0 126px;
+    padding: 0;
 }
 input, label,select{
     width: 350px;
@@ -741,12 +771,24 @@ button{
     font-size:22px;
 }
 
+.location-result .note {
+    max-width: 700px;
+}
+
 }/*end MQ 760*/
 
 @media only screen and (min-width:1190px){
 
 body {
         min-height: 1200px;
+}
+
+p {
+    font-size: 20px;
+}
+
+legend {
+    font-size: 27px;
 }
 
  .night-list, .day-list{
@@ -787,6 +829,10 @@ section{
     width:600px;
 }
 
+.rotating-text__container {
+    justify-content: left;
+}
+
 .header-start, .start-screen {
     position: fixed;
     left: 78%;
@@ -814,9 +860,7 @@ section{
 }
 
 .header-start .rotating-text__container {
-    padding: 0 40px;
-    padding-left: 10%;
-    left:54px;
+    padding: 0;
   }
 
 
@@ -854,6 +898,10 @@ fieldset{
     text-align: left;
 }
 
+.night-list img {
+    width: 255px;
+
+}
 /*
 
 legend{
