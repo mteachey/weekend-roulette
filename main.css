@@ -187,7 +187,7 @@ section.fade-in{
     border: 0px double rgba(255,255,255,0);
     opacity:1;
     left: 50%;
-    top: 360px;
+    top: 310px;
     transform: translate(-50%,0%);
     display:flex;
     justify-content: space-around;
@@ -235,6 +235,11 @@ label {
     display:block;
 }
 
+#event-form label{
+    margin:auto;
+    margin-top:20px;
+}
+
 .field-set-with-checkboxes label {
     text-align: center;
 }
@@ -263,6 +268,13 @@ input, select{
     margin-bottom: 15px;
     text-align:center;
     width:250px;
+    
+}
+
+#latLong-form input, #latLong-form select{
+    margin:auto;
+    margin-top: 6px;
+    margin-bottom: 15px;
 }
 
 input[type=checkbox]{
@@ -343,12 +355,23 @@ button {
     font-size: 25px;
 }
 
+button:hover {
+    color: #fe0058;
+    background-color: rgba(0,0,0,1);
+}
+
 .grey-button {
     display: block;
     color: #fff;
     background-color: rgba(255,255,255,0.25);
     margin: 15px auto;
     border: rgba(255,255,255,.25) solid 1px;
+}
+
+.grey-button:hover{
+    color: #fe0058;
+    background-color: rgba(0,0,0,.5);
+    border: rgba(255,255,255,1) solid 1px;
 }
 
 #reset-location-button {
@@ -446,6 +469,7 @@ li.first-item{
     text-shadow: 2px 2px #fff;
     color: #1701b7;
     font-size:2.5rem;
+    width: 205px;  /*to keep the words on two lines*/
 }
 
 .results button {
@@ -454,12 +478,19 @@ li.first-item{
     border: 1px #1701b7 solid;
 }
 
+.results button:hover, .results .grey-button:hover{
+    color: #fe0058;
+    background-color:#fff;
+}
+
 .results .grey-button {
     color: #000;
     background-color: rgba(0,0,0,0.15);
     margin: 15px auto;
     border: rgba(0,0,0,.25) solid 1px;
 }
+
+
 
 .error-message {
     color: red;
@@ -533,7 +564,7 @@ li.first-item{
 
 .loading-image{
     position: absolute;
-    top: 70%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -621,9 +652,15 @@ li.first-item{
     font-size:25px;
 }
 
+.rotating-text{
+    display:none;
+}
+
 .header-start .rotating-text{
     margin-top: .5em;
+    display:block;
 }
+
 
 .rotating-text {
     position: relative;
@@ -702,7 +739,7 @@ li.first-item{
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    top: 45px;
+    top: 40px;
     left: 50%;
     border-radius: 5px;
     transform: translate(-50%, 0);
@@ -710,6 +747,10 @@ li.first-item{
     width: 35px;
     background-color: #eee;
   }
+
+  .main-label ~ .checkmark {
+    top: 50px;
+}
   
   /* On mouse-over, add a grey background color */
   .checkbox-container:hover input ~ .checkmark {
@@ -812,9 +853,10 @@ h3{
    font-size: 2.25rem;
 }
 
-.start-screen{
-    top:310px;
+.rotating-text{
+    display:block;
 }
+
 .rotating-text__container {
     padding: 0;
 }
@@ -850,6 +892,10 @@ button{
 
 .location-result .note {
     max-width: 700px;
+}
+
+.main-background-results h1{
+    width: auto;  
 }
 
 }/*end MQ 760*/
