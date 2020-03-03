@@ -469,8 +469,8 @@ li.first-item{
     width: 225px;
     border-radius: 5px;
     border: 1px solid #fff;
-    margin: auto;
-    display: block;
+    /*margin: auto;
+    display: block;*/
 }
 
 .note {

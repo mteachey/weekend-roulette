@@ -103,8 +103,16 @@ function displayNightResults(nightWinners){
      spinner.setAttribute('hidden', '');  
       
      for(let i=0; i < nightWinners.length; i++){
+        
+
         $('.night-list-container').append(`<ul class="night-list night-list${i+1}"></ul>`);
+        
        $(`.night-list${i+1}`).append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
+
+       if(nightWinners[i].restaurant.featured_image != undefined){
+        $(`.night-list${i+1}`).append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);
+        };
+
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Name: ${nightWinners[i].restaurant.name}</li>`);
       
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Address: ${nightWinners[i].restaurant.location.address}</li>`);
@@ -112,10 +120,11 @@ function displayNightResults(nightWinners){
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Cuisine: ${nightWinners[i].restaurant.cuisines}</li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Average Cost for Two People: $${nightWinners[i].restaurant.average_cost_for_two}</li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item"><a class="link" href="${nightWinners[i].restaurant.url}" target="_blank">More Info</a></li>`);
-      if(nightWinners[i].restaurant.featured_image != undefined){
-      $(`.night-list${i+1}`).append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);};
+
+     
        
      }//end of for loop
+     $('.night-list-container').append(`<p class="note">If these activities aren't what you were looking for, double check the city and state and spin again!`)
        
     }
 
@@ -138,7 +147,7 @@ function displayActivityForm(latitude,longitude,city, state){
     $('#location-input').addClass('js-hidden');
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
-    $('.location-result').append(`<p>You are searching for activities around <span class="bold">${city}, ${state}</span>. <span class="italic">Please, double check the spelling of your city.</span></p><p>This city's latitude and longtitude is ${latitude}<sup>o</sup> and ${longitude}<sup>o</sup> - just in case you were wondering</p><p class="note">Please know, if you mistakenly misspelled the city or selected the wrong state, we will find the closest match to what you entered.</p>`);
+    $('.location-result').append(`<p>You are searching for activities closest to <span class="bold">${city}, ${state} (${latitude}<sup>o</sup> and ${longitude}<sup>o</sup>) </span>.`);
     console.log(`displayActivityForm ran`)
 }
 
@@ -512,7 +521,6 @@ function displayNewBackground(){
    $('.mask1').removeClass('animation-mask-1');
    $('.mask2').removeClass('animation-mask-2');
    $('.mask3').removeClass('animation-mask-3');
-   $('.mask1').addClass('newbackground');
    $('.mask').addClass('zindex');
    //$('body').css('background-image','none');
     $('main').addClass('main-background');
