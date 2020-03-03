@@ -62,6 +62,7 @@ function displayDayResults(dayWinners, nightCheck){
   $('.mask1').removeClass('newbackground');
   $('.mask2').addClass('newbackground');
   $('.main').addClass('main-background-wider');
+  $('.main').addClass('main-background-results');
   $('.results').removeClass('js-hidden');   
   $('.results-header').removeClass('js-hidden'); 
   $('.results-day').removeClass('js-hidden'); 
@@ -94,6 +95,7 @@ function displayNightResults(nightWinners){
       $('.results').removeClass('js-hidden');   
       $('.results-header').removeClass('js-hidden'); 
       $('.results-night').removeClass('js-hidden'); 
+      $('.main').addClass('main-background-results');
       $('.main').addClass('main-background-wider');
       $('.results-night').empty()
       $('.results-night').addClass('border');
@@ -104,12 +106,11 @@ function displayNightResults(nightWinners){
       
      for(let i=0; i < nightWinners.length; i++){
         
-
         $('.night-list-container').append(`<ul class="night-list night-list${i+1}"></ul>`);
         
        $(`.night-list${i+1}`).append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
 
-       if(nightWinners[i].restaurant.featured_image != undefined){
+       if(nightWinners[i].restaurant.featured_image != undefined && nightWinners[i].restaurant.featured_image != 'unknown'){
         $(`.night-list${i+1}`).append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);
         };
 
@@ -140,14 +141,15 @@ function formatLatLong(locationResult, city, state){
 function displayActivityForm(latitude,longitude,city, state){
     scrollToTop();
     $('body').css('background-image','none');
-    //$('.mask1').removeClass('newbackground');
+    $('.mask1').addClass('newbackground');
+    $('.mask-start').addClass('mask-transparent');
     //$('.mask2').addClass('newbackground');
     $('#activities-input').addClass('js-fade-in');
     
     $('#location-input').addClass('js-hidden');
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
-    $('.location-result').append(`<p>You are searching for activities closest to <span class="bold">${city}, ${state} (${latitude}<sup>o</sup> and ${longitude}<sup>o</sup>) </span>.`);
+    $('.location-result').append(`<p>You are searching for activities closest to <span class="bold">${city}, ${state}</span> (${latitude}<sup>o</sup> and ${longitude}<sup>o</sup>) </p>.`);
     console.log(`displayActivityForm ran`)
 }
 
@@ -398,6 +400,8 @@ function resetLocation(){
         $('#location-input').removeClass('js-hidden');
         $('#intro').removeClass('js-hidden');
         $('#activities-input').addClass('js-hidden');
+        $('.mask-start').removeClass('mask-transparent');
+        $('.mask1').removeClass('newbackground');
         //$('#city').val("");
         //$('#state').val("");
         $("#event-form")[0].reset();
@@ -412,6 +416,9 @@ function rollAgain(){
         $('.results-day').empty();
         $('.results-night').empty();
         $('.results').addClass('js-hidden');
+        $('.main').removeClass('main-background-results');
+        $('.mask1').addClass('newbackground');
+        $('.mask2').removeClass('newbackground');
         $('.results-header').addClass('js-hidden');;
         $('.results-night').removeClass('border');
         $('.results-day').removeClass('border');
@@ -454,6 +461,7 @@ function handleLearnMoreResults(){
     $('#learnmore-results').on('click',function(){
         
         event.preventDefault();
+        $('.main').removeClass('main-background-results')
         displayIntrowithResults();
         
     })
@@ -518,6 +526,7 @@ function handleNoDayChecked() {
 function displayNewBackground(){
     scrollToTop();
    $('.mask-solid').addClass('js-hidden');
+   $('.mask-start').removeClass('animation-mask-start');
    $('.mask1').removeClass('animation-mask-1');
    $('.mask2').removeClass('animation-mask-2');
    $('.mask3').removeClass('animation-mask-3');
