@@ -29,10 +29,10 @@ html {
 
 body{
     height: 100%;
-    min-height:1200px;
+   
     width: 100%;
     margin-top: -20px;
-    background-image:url("_images/roulette.jpg");
+    background-image:url("https://paintedskycreative.com/_external-images/weekend-roulette/roulette.jpg");
     background-position:center center;
     background-size:cover;
     background-attachment: fixed;
@@ -123,7 +123,7 @@ h1, h2, h3{
 }
 
 h1{
-    font-size:2.5rem;
+    font-size:2rem;
     font-family: 'Monoton', cursive;
     text-shadow: 2px 2px #fe0058;
 }
@@ -131,11 +131,11 @@ h1{
 h2{
 /*font-family: 'Squada One';
 font-family: 'Marcellus' ;*/
-font-size:1.75rem;
+font-size:1.5rem;
 }
 
 h3{
-    font-size:1.4rem;
+    font-size:1.25rem;
 }
 
 p{
@@ -590,10 +590,13 @@ li.first-item{
 }
   
 /*title animation*/
+.header-start .title{
+    font-size:3.25em;
+}
 .title {
     position: relative;
     font-weight: 900;
-    font-size: 3.25em;
+    font-size: 1.5rem;
 }
   
 .title .text-wrapper {
@@ -615,14 +618,19 @@ li.first-item{
     font-size:25px;
 }
 
+.header-start .rotating-text{
+    left: 15px;
+    transform: translate(0%, 0%);
+}
+
 .rotating-text {
     position: absolute;
     bottom: 0%;
-    left: 12px;
-    transform: translate(0%, 0%);
+    left: 27px;
+    transform: translate(9%, 0%);
     height: 100px;
     overflow: hidden;
-    font-size: 35px;
+    font-size: 32px;
     line-height: 58px;
     width:100%;
     min-width:350px;
@@ -641,7 +649,7 @@ li.first-item{
 }
 .rotating-text__container__list {
     margin-top: 0;
-    padding-left: 146px;
+    padding-left: 137px;
     text-align: left;
     list-style: none;
     -webkit-animation-name: change;
@@ -654,7 +662,7 @@ li.first-item{
 
 .rotating-text__container__text{            /*the will you*/
     line-height:58px;
-    font-size: 35px;
+    font-size: 32px;
 }
 
 .rotating-text__container__list__item {
@@ -671,6 +679,20 @@ li.first-item{
     padding-left:119px;
 }
 
+@media only screen and (min-width:540px){
+h1{
+    font-size:2.5rem;
+}
+
+h2{
+font-size:1.75rem;
+}
+
+h3{
+    font-size:1.4rem;
+}
+}
+
 @media only screen and (min-width:760px){
 .header-start {
    top: 75px;
@@ -681,6 +703,9 @@ li.first-item{
 .header {
     font-size: 12px;
     padding-top: 35px;
+}
+.title {
+   font-size: 1.75rem;
 }
 
 .start-screen{
@@ -719,6 +744,11 @@ button{
 }/*end MQ 760*/
 
 @media only screen and (min-width:1190px){
+
+body {
+        min-height: 1200px;
+}
+
  .night-list, .day-list{
     width:46%;   
  }
@@ -1085,7 +1115,7 @@ input[type=checkbox]{
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    top: 35px;
+    top: 45px;
     left: 50%;
     border-radius: 5px;
     transform: translate(-50%, 0);
