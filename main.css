@@ -160,7 +160,7 @@ section {
     transition: 2s opacity;
     transition:2s left;
     margin:auto;
-    margin-top:-45px;
+    /*margin-top:-45px;*/
     width:96%;
 }
 
@@ -469,7 +469,7 @@ li.first-item{
     text-shadow: 2px 2px #fff;
     color: #1701b7;
     font-size:2.5rem;
-    width: 205px;  /*to keep the words on two lines*/
+    width: 235px;  /*to keep the words on two lines*/
 }
 
 .results button {
@@ -548,13 +548,6 @@ li.first-item{
 
 /*loading animation - spinner and roulette*/
 
-.loading-image{
-    position: absolute;
-    top: 70%;
-    left: 66%;
-    transform: translate(-50%, -50%);
-}
-
 #spinner:not([hidden]), #globe:not([hidden]) {
     position: absolute;
     display: flex;
@@ -564,7 +557,7 @@ li.first-item{
 
 .loading-image{
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -850,11 +843,15 @@ h3{
 }
 
 .title {
-   font-size: 2.25rem;
+   font-size: 2.2rem;
 }
 
 .rotating-text{
     display:block;
+}
+
+.main-background-results .rotating-text{
+    display: none;
 }
 
 .rotating-text__container {
@@ -896,6 +893,10 @@ button{
 
 .main-background-results h1{
     width: auto;  
+}
+
+.loading-image{
+    top: 50%;
 }
 
 }/*end MQ 760*/
