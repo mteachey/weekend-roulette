@@ -15,6 +15,7 @@ const latLongEndPoint = 'https://api.opencagedata.com/geocode/v1/json';
 let dayActivity = [];
 
 function resultsHikingOrBiking(responseJson,pick, nightCheck){
+//this function creates an array of all the results from hiking and/or biking before calling the pickDayActivities
     let numberOfResults = responseJson.trails.length;
     for (let i=0; i<numberOfResults; i++ ){
        dayActivity.push(responseJson.trails[i]);
@@ -27,6 +28,7 @@ function resultsHikingOrBiking(responseJson,pick, nightCheck){
 }
 
 function pickDayActivities(dayActivity,nightCheck){
+//this function randonmly chooses two different hikes or bikes from the array of hikes and/or bikes
     let dayActivityOneNumber = Math.floor(Math.random() * (dayActivity.length));
     let dayActivityTwoNumber = Math.floor(Math.random() * (dayActivity.length));
     while(dayActivityTwoNumber === dayActivityOneNumber){
@@ -39,6 +41,7 @@ function pickDayActivities(dayActivity,nightCheck){
 }
 
 function resultsRestaurant(results){
+//this function randomly chooses two different restaurants out of the random 20 that were selected
     let restaurantPickOne = Math.floor(Math.random() * (20));
     let restaurantPickTwo = Math.floor(Math.random() * (20));
     while(restaurantPickOne === restaurantPickTwo){
@@ -118,6 +121,7 @@ function displayNightResults(nightWinners){
 
 
 function formatLatLong(locationResult, city, state){
+//this function formats the latitude and longitude values from the OpenCage API to use in the other API calls
     latitude = locationResult.geometry.lat;
     longitude = locationResult.geometry.lng;
     globe.setAttribute('hidden', '');  
@@ -246,7 +250,9 @@ function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
         
 }
 
+//the next three functions are used to get the most random restaurants from the API call. The API will only give give 20 results at a time. The functions are created to allow the app to select from more than just the top 20 restaurants returned.
 
+//the first function, checks to see how many results the API returns for a particular area 
 function getAllRestaurants(){
     
     const url = `${restaurantEndPoint}?lat=${latitude}&lon=${longitude}`;
@@ -279,11 +285,11 @@ function getAllRestaurants(){
      });
     
 }
-//end of API call functions
 
+//this function then finds a random start point (must be less than 80) 
 function getRandomStart(responseJson){
     let numberOfResults = responseJson.results_found;
-    //the API will not let the start be greater than 80 bc the api cal won't work
+    //the API will not let the start be greater than 80 bc the api call won't work
     if(numberOfResults > 80){
         numberOfResults = 80;
     }
@@ -292,6 +298,7 @@ function getRandomStart(responseJson){
     getTwentyRandomRestaurant(randomStartOfResultsShown);
 }
 
+//this function calls the API again with the random start point
 function getTwentyRandomRestaurant(startNumber){
     
     const url = `${restaurantEndPoint}?lat=${latitude}&lon=${longitude}&start=${startNumber}`;
@@ -309,10 +316,10 @@ function getTwentyRandomRestaurant(startNumber){
           resultsRestaurant(responseJson);    
       })      
 }
-
+//end of API call functions
 
 function callAPIs(radiusDay,length,hiking,mtnbiking,dayCheck,nightCheck){
- //call all of the individual API functions
+ //calls all of the individual API functions
     
   if (dayCheck === 'yes' && (mtnbiking==='yes' || hiking==='yes')){
         //call getHikes and getBikes if checked and only call PickActivities for one of them)
@@ -333,8 +340,6 @@ function callAPIs(radiusDay,length,hiking,mtnbiking,dayCheck,nightCheck){
 
 
 function watchActivityFormSubmit(){
-//listen for submit event (click button or enter), prevent default
-//retrieve input values 
 $('#event-form').submit(function(event){
     event.preventDefault();
     $('#js-error-message').empty();
@@ -352,7 +357,6 @@ $('#event-form').submit(function(event){
     dayActivity = [];
 
     //scroll to top after submit 
-   
     scrollToTop();
 
     callAPIs(radiusDay, length, hiking,mtnbiking,dayCheck,nightCheck);
@@ -506,6 +510,7 @@ function handleNoDayChecked() {
     $('#remove-intro').on('click', event => {
      $('#intro').addClass('js-hidden');
      $('#intro').removeClass('intro-with-results');
+     scrollToTop();
     });
  } 
 
