@@ -43,8 +43,7 @@ function resultsRestaurant(results){
     let restaurantPickTwo = Math.floor(Math.random() * (20));
     while(restaurantPickOne === restaurantPickTwo){
         restaurantPickTwo = Math.floor(Math.random() * (20));
-    }
-    
+    }   
     let nightWinners = [];
     nightWinners = [results.restaurants[restaurantPickOne],results.restaurants[restaurantPickTwo]];
     displayNightResults(nightWinners);
@@ -76,8 +75,7 @@ function displayDayResults(dayWinners, nightCheck){
     $(`.day-list${i+1}`).append(`<li class="day-list-item">Length: ${dayWinners[i]['length']}mi.</li>`);
     if(nightCheck === 'no'){
         spinner.setAttribute('hidden', ''); 
-    }
-    
+    }   
  }//end of for loop
     
 }
@@ -117,8 +115,7 @@ function displayNightResults(nightWinners){
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Average Cost for Two People: $${nightWinners[i].restaurant.average_cost_for_two}</li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item"><a class="link" href="${nightWinners[i].restaurant.url}" target="_blank">More Info</a></li>`); 
      }//end of for loop
-     $('.night-list-container').append(`<p class="note">If these activities aren't what you were looking for, double check the city and state and spin again!`)
-       
+     $('.night-list-container').append(`<p class="note">If these activities aren't what you were looking for, double check the city and state and spin again!`)       
     }
 
 
@@ -140,9 +137,7 @@ function displayActivityForm(latitude,longitude,city, state){
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
     $('.location-result').append(`<p>You are searching for activities closest to <span class="bold">${city}, ${state}</span> (${latitude}<sup>o</sup> and ${longitude}<sup>o</sup>) </p>.`);
-
 }
-
 
 //API functions
  
@@ -159,14 +154,12 @@ function getLatLong(cityInput, stateInput){
         throw new Error(response.statusText);  
 
     })
-    .then(responseJson=>{
-        
+    .then(responseJson=>{        
         formatLatLong(responseJson.results[0], cityInput, stateInput);
     })
     .catch(err => {
         $('#js-error-message').text(`Sorry, something was went wrong finding your location. Check your spelling and try again.`)
-     });
-    
+     });    
 }
 
 function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
@@ -181,16 +174,15 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
-          console.log(`got here`);
-          console.log(`${responseJson}`);
           spinner.removeAttribute('hidden');
          let numberOfResults = responseJson.trails.length;
-         console.log(`this is the number of ${numberOfResults}`)
-         if(numberOfResults < 2){
-            //$('#js-error-message').text(`Sorry, it looks like we didn't find any bikes or hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes and/or hikes. `)
+         if(numberOfResults < 2 && !hikingAlso){
             spinner.setAttribute('hidden', ''); 
             $('#activities-input').removeClass('js-hidden');
             $('.alert-activities').removeClass('js-hidden');
+         }
+         else if(numberOfResults < 2 && hikingAlso){
+                getHikes(radiusDay,length, false, nightCheck);
          }
          else{
                 for (let i=0; i<numberOfResults; i++ ){
@@ -230,11 +222,14 @@ function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
       .then(responseJson=>{
         spinner.removeAttribute('hidden');
         let numberOfResults = responseJson.trails.length;
-        if(numberOfResults < 2){
-            //$('#js-error-message').text(`Sorry, it looks like we didn't find any hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck hikes. `)
+        if(numberOfResults < 2 && !bikeAlso){
             spinner.setAttribute('hidden', ''); 
             $('#activities-input').removeClass('js-hidden');
             $('.alert-activities').removeClass('js-hidden');
+         }
+         else if(numberOfResults <2 && bikeAlso)
+         {
+            resultsHikingOrBiking(responseJson, true, nightCheck);
          }
          else {
             for (let i=0; i<numberOfResults; i++ ){
@@ -333,8 +328,6 @@ function callAPIs(radiusDay,length,hiking,mtnbiking,dayCheck,nightCheck){
             getHikes(radiusDay,length, false,nightCheck);
         }
     }//end if for day
-    else {console.log(`no day activities checked`)}//eventually this will render instead of logging to console
-
      if(dayCheck === 'no' && nightCheck === 'yes'){
         getAllRestaurants();
     }
@@ -344,7 +337,6 @@ function callAPIs(radiusDay,length,hiking,mtnbiking,dayCheck,nightCheck){
 function watchActivityFormSubmit(){
 //listen for submit event (click button or enter), prevent default
 //retrieve input values 
-
 $('#event-form').submit(function(event){
     event.preventDefault();
     $('#js-error-message').empty();
@@ -366,8 +358,7 @@ $('#event-form').submit(function(event){
     scrollToTop();
 
     callAPIs(radiusDay, length, hiking,mtnbiking,dayCheck,nightCheck);
-});
-    
+});    
 }
 
 function scrollToTop(){
@@ -387,8 +378,7 @@ function watchLatLongFormSubmit(){
      else
       {
       $('.alert-location').removeClass('js-hidden')
-      }
-    
+      }    
     });  
 }
 
@@ -399,8 +389,6 @@ function resetLocation(){
         $('#activities-input').addClass('js-hidden');
         $('.mask-start').removeClass('mask-transparent');
         $('.mask1').removeClass('newbackground');
-        //$('#city').val("");
-        //$('#state').val("");
         $("#event-form")[0].reset();
         $('.location-result').empty();
         resetDisplay();
@@ -409,14 +397,19 @@ function resetLocation(){
 
 function rollAgain(){
     $('#roll-again').on('click',function(){
-        $('#activities-input').removeClass('js-hidden');
+        //clear out the old result elements from the DOM
         $('.results-day').empty();
         $('.results-night').empty();
+        //change what section is displayed to the user
         $('.results').addClass('js-hidden');
+        $('.results-night').addClass('js-hidden');
+        $('.results-day').addClass('js-hidden');
+        $('#activities-input').removeClass('js-hidden');
+        //change the background
         $('.main').removeClass('main-background-results');
         $('.mask1').addClass('newbackground');
         $('.mask2').removeClass('newbackground');
-        $('.results-header').addClass('js-hidden');;
+        $('.results-header').addClass('js-hidden');
         $('.results-night').removeClass('border');
         $('.results-day').removeClass('border');
     })
@@ -437,32 +430,27 @@ function handleLearnMoreSubmit(){
     $('#learnmore-intro').on('click',function(){
         event.preventDefault();
         displayIntro();
-        displayNewBackground();
-        
-    })
-    
+        displayNewBackground();        
+    })   
     $('#learnmore-activities').on('click',function(){
         event.preventDefault();
-        displayIntro();
-       
+        displayIntro();       
     })
     $('#learnmore-location').on('click',function(){
         event.preventDefault();
         displayIntro();       
-    })
-    
+    })    
 }
 
 function handleLearnMoreResults(){
     $('#learnmore-results').on('click',function(){
         event.preventDefault();
-        $('.main').removeClass('main-background-results')
-        displayIntrowithResults();
-        
+        displayIntrowithResults();       
     })
 }
 
-function displayIntro(){   
+function displayIntro(){  
+//this function displays the Learn More/Intro section 
         scrollToTop();
         $('#intro').removeClass('js-hidden');
         $('#start-screen').addClass('js-hidden');
@@ -471,11 +459,11 @@ function displayIntro(){
         $('.results').addClass('js-hidden');
         $('#activities-input').addClass('js-hidden');
         $('#start-intro').removeClass('js-hidden');
-        $('#remove-intro').addClass('js-hidden');
-        
+        $('#remove-intro').addClass('js-hidden');        
 }
 
 function displayIntrowithResults(){
+//this function disaplys the Learn More/intro section with their Results
     $('#intro').removeClass('js-hidden');
     $('#intro').addClass('intro-with-results');
     $('#start-screen').addClass('js-hidden');
@@ -484,11 +472,10 @@ function displayIntrowithResults(){
     $('#activities-input').addClass('js-hidden');
     $('#start-intro').addClass('js-hidden');
     $('#remove-intro').removeClass('js-hidden');
-    
-
 };
 
 function resetDisplay(){
+//this function handles reseting some common elements 
     $('.rotating-text').removeClass('js-hidden');
     $('.results').addClass('js-hidden');
     $('#activities-input').addClass('js-hidden');
@@ -500,18 +487,21 @@ function resetDisplay(){
 
 
 function handleNoDayChecked() {
+//this function hides the Options for Day Activities if a user unchecks "I want day.."
     $('#day').on('click', event => {
       $('.options').toggleClass('js-hidden');
     });
   }
 
  function handleCloseButton(){
+//this function hides the alert box
     $('.closebtn').on('click', event => {
      $('.alert').addClass('js-hidden');
     });
  } 
 
  function handleRemoveIntro(){
+//this function removes the Learn More/Intro elements
     $('#remove-intro').on('click', event => {
      $('#intro').addClass('js-hidden');
      $('#intro').removeClass('intro-with-results');
@@ -519,6 +509,7 @@ function handleNoDayChecked() {
  } 
 
 function displayNewBackground(){
+//this function changes the backgrounds from the start screen to the other screens
     scrollToTop();
    $('.mask-solid').addClass('js-hidden');
    $('.mask-start').removeClass('animation-mask-start');
@@ -526,7 +517,6 @@ function displayNewBackground(){
    $('.mask2').removeClass('animation-mask-2');
    $('.mask3').removeClass('animation-mask-3');
    $('.mask').addClass('zindex');
-   //$('body').css('background-image','none');
     $('main').addClass('main-background');
    $('#location-input').removeClass('js-slide-in');
    $('#location-input').addClass('js-fade-in');
@@ -538,11 +528,9 @@ function displayNewBackground(){
    $('.rotating-text__container__list__item').addClass('js-change-rotating-text');
    $('.rotating-text__container__list').addClass('js-change-rotating-text-padding');
    $('.rotating-text').css('width','unset');
-   $('.tagline').addClass('js-hidden');
-     
+   $('.tagline').addClass('js-hidden');     
  }
 
- 
 function handleWeekendRoulette(){
     start();
     scrollToTop();

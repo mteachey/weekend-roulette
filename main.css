@@ -460,7 +460,6 @@ li.first-item{
 }
 
 .main-background-results{
-    background-color:rgba(255,255,255,.7);
     box-shadow: -3px -4px 16px 5px rgba(255,255,255,0.5);
     color:#000;
 }
@@ -472,25 +471,9 @@ li.first-item{
     width: 235px;  /*to keep the words on two lines*/
 }
 
-.results button {
-    background-color: #000;
-    color: #fff;
-    border: 1px #1701b7 solid;
+.results-header h2, .intro-text{
+    color:#fff;
 }
-
-.results button:hover, .results .grey-button:hover{
-    color: #fe0058;
-    background-color:#fff;
-}
-
-.results .grey-button {
-    color: #000;
-    background-color: rgba(0,0,0,0.15);
-    margin: 15px auto;
-    border: rgba(0,0,0,.25) solid 1px;
-}
-
-
 
 .error-message {
     color: red;
@@ -592,6 +575,7 @@ li.first-item{
     top: 135px;
     transform: translate(-50%,0);
     border-radius: 10px;
+    z-index: 100;
 }
 
 .alert-activities{
@@ -824,6 +808,10 @@ h3{
 .alert {
     width: 500px;
 }
+
+.night-list img {
+    width: 255px;
+}
   
 }/*end of MQ540*/
 
@@ -897,6 +885,17 @@ button{
 
 }/*end MQ 760*/
 
+@media only screen and (min-width:960px){
+.night-list, .day-list{
+    width:46%;   
+    padding-inline-start: 0px;
+ }
+
+.night-list1, .day-list1 {
+    border-bottom: 0px #fff solid;
+}
+}/*end MQ 960*/
+
 @media only screen and (min-width:1190px){
 
 body {
@@ -909,14 +908,6 @@ p {
 
 legend {
     font-size: 27px;
-}
-
-.night-list, .day-list{
-    width:46%;   
- }
-
-.night-list1, .day-list1 {
-    border-bottom: 0px #fff solid;
 }
 
 section{
@@ -1021,9 +1012,6 @@ fieldset{
     text-align: left;
 }
 
-.night-list img {
-    width: 255px;
-}
 } /*end MQ960*/
 
 @media and screen and (min-width:1260px){
