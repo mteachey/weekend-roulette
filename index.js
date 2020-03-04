@@ -100,14 +100,12 @@ function displayNightResults(nightWinners){
      for(let i=0; i < nightWinners.length; i++){
         
         $('.night-list-container').append(`<ul class="night-list night-list${i+1}"></ul>`);
-        
-       $(`.night-list${i+1}`).append(`<li class="night-list-item first-item">Restaurant ${i+1}</li>`);
-
-       if(nightWinners[i].restaurant.featured_image != undefined && nightWinners[i].restaurant.featured_image != 'unknown'){
-        $(`.night-list${i+1}`).append(`<li class="night-list-item"><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.featured_image}"\></li>`);
+       
+       if(nightWinners[i].restaurant.thumb != undefined && nightWinners[i].restaurant.thumb != 'unknown'){
+        $(`.night-list${i+1}`).append(`<li class="night-list-item first-item"><div><img alt="Image for ${nightWinners[i].restaurant.name}"src="${nightWinners[i].restaurant.thumb}"\></div></li>`);
         };
 
-      $(`.night-list${i+1}`).append(`<li class="night-list-item">Name: ${nightWinners[i].restaurant.name}</li>`);
+      $(`.night-list${i+1}`).append(`<li class="night-list-item">Restaurant ${i+1}: ${nightWinners[i].restaurant.name}</li>`);
       
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Address: ${nightWinners[i].restaurant.location.address}</li>`);
       

@@ -671,7 +671,7 @@ li.first-item{
     -webkit-animation-duration: 10s;
     -webkit-animation-iteration-count: infinite;
     animation-name: change;
-    animation-duration: 10s;
+    animation-duration: 0s;
     animation-iteration-count: infinite;
 }
 
@@ -810,7 +810,10 @@ h3{
 }
 
 .night-list img {
-    width: 255px;
+    width: 100%;
+    max-width: 300px;
+    display:block;
+    margin:auto;
 }
   
 }/*end of MQ540*/
@@ -887,17 +890,25 @@ button{
     top: 50%;
 }
 
-}/*end MQ 760*/
-
-@media only screen and (min-width:960px){
-.night-list, .day-list{
+.day-list, .night-list{
     width:46%;   
     padding-inline-start: 0px;
  }
 
-.night-list1, .day-list1 {
+.day-list1,.night-list {
     border-bottom: 0px #fff solid;
 }
+li{
+    margin: auto;
+    margin-bottom: 15px;
+    max-width: 350px;
+}
+
+}/*end MQ 760*/
+
+@media only screen and (min-width:960px){
+
+
 }/*end MQ 960*/
 
 @media only screen and (min-width:1190px){
@@ -970,11 +981,12 @@ section{
 .rotating-text__container {
     padding: 0;
     padding-left: 6%;
+    padding-top:5px;
 } 
 
 .main-background .rotating-text {
     left: 12px;
-    transform: translate(0%, 21%);
+    padding-top:21px;
 }
 
 .header-start .rotating-text__container {
@@ -987,7 +999,7 @@ section{
     margin-left:40%;   
     transition: 2s background-color;
     box-shadow: -3px -4px 16px 5px rgba(0,0,0,0.75);
-    max-width: 2000px;
+    max-width: 1300px;
 }
 
 .main-background-wider{
