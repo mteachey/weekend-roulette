@@ -472,6 +472,9 @@ function displayIntrowithResults(){
     $('#activities-input').addClass('js-hidden');
     $('#start-intro').addClass('js-hidden');
     $('#remove-intro').removeClass('js-hidden');
+    $('html, body').animate({
+        scrollTop: $("#intro").offset().top
+         }, 2000);
 };
 
 function resetDisplay(){

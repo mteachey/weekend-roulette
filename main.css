@@ -467,7 +467,7 @@ li.first-item{
 .main-background-results h1{
     text-shadow: 2px 2px #fff;
     color: #1701b7;
-    font-size:2.5rem;
+    font-size:2.25rem;
     width: 235px;  /*to keep the words on two lines*/
 }
 
@@ -815,7 +815,7 @@ h3{
   
 }/*end of MQ540*/
 
-@media only screen and (min-width:760px){
+@media only screen and (min-width:760px){    
 .header-start {
    top: 75px;
    width:600px;
@@ -836,6 +836,10 @@ h3{
 
 .main-background-results .rotating-text{
     display: none;
+}
+
+.main-background-results h1{
+    font-size:2.5rem;
 }
 
 .rotating-text__container {
