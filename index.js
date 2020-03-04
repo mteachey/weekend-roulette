@@ -1,6 +1,5 @@
 'use strict';
 
-
 let latitude = 0;
 let longitude = 0;
 
@@ -8,7 +7,6 @@ const hikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
 const bikeKey = '200684713-dde33619c13cd28faa7456223edcf195';
 const restaurantKey = 'e5800b1de7b26545fe07ad6a49160396';
 const latLongKey = '6c790e07e8a9409b98ba70f8cbde2eab';
-
 const hikeEndPoint = 'https://www.hikingproject.com/data/get-trails';
 const bikeEndPoint = 'https://www.mtbproject.com/data/get-trails';
 const restaurantEndPoint = 'https://developers.zomato.com/api/v2.1/search';
@@ -37,7 +35,6 @@ function pickDayActivities(dayActivity,nightCheck){
     
     let dayWinners =[];
     dayWinners = [dayActivity[dayActivityOneNumber],dayActivity[dayActivityTwoNumber]];
-   
     displayDayResults(dayWinners, nightCheck);
 }
 
@@ -55,7 +52,6 @@ function resultsRestaurant(results){
 }
 
 function displayDayResults(dayWinners, nightCheck){
-//this function display the day results
   $('body').addClass('bike-background');
   $('.rotating-text').addClass('js-hidden');
   $('#activities-input').addClass('js-hidden');
@@ -87,7 +83,6 @@ function displayDayResults(dayWinners, nightCheck){
 }
 
 function displayNightResults(nightWinners){
-    //this function display the night results
     $('body').addClass('bike-background');
     $('.mask1').removeClass('newbackground');
     $('.mask2').addClass('newbackground');
@@ -120,10 +115,7 @@ function displayNightResults(nightWinners){
       
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Cuisine: ${nightWinners[i].restaurant.cuisines}</li>`);
       $(`.night-list${i+1}`).append(`<li class="night-list-item">Average Cost for Two People: $${nightWinners[i].restaurant.average_cost_for_two}</li>`);
-      $(`.night-list${i+1}`).append(`<li class="night-list-item"><a class="link" href="${nightWinners[i].restaurant.url}" target="_blank">More Info</a></li>`);
-
-     
-       
+      $(`.night-list${i+1}`).append(`<li class="night-list-item"><a class="link" href="${nightWinners[i].restaurant.url}" target="_blank">More Info</a></li>`); 
      }//end of for loop
      $('.night-list-container').append(`<p class="note">If these activities aren't what you were looking for, double check the city and state and spin again!`)
        
@@ -143,14 +135,12 @@ function displayActivityForm(latitude,longitude,city, state){
     $('body').css('background-image','none');
     $('.mask1').addClass('newbackground');
     $('.mask-start').addClass('mask-transparent');
-    //$('.mask2').addClass('newbackground');
     $('#activities-input').addClass('js-fade-in');
-    
     $('#location-input').addClass('js-hidden');
     $('#intro').addClass('js-hidden');
     $('#activities-input').removeClass('js-hidden');
     $('.location-result').append(`<p>You are searching for activities closest to <span class="bold">${city}, ${state}</span> (${latitude}<sup>o</sup> and ${longitude}<sup>o</sup>) </p>.`);
-    console.log(`displayActivityForm ran`)
+
 }
 
 
@@ -191,10 +181,15 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
         throw new Error(response.statusText);
       })
       .then(responseJson=>{
-        spinner.removeAttribute('hidden');
+          console.log(`got here`);
+          console.log(`${responseJson}`);
+          spinner.removeAttribute('hidden');
          let numberOfResults = responseJson.trails.length;
+         console.log(`this is the number of ${numberOfResults}`)
          if(numberOfResults < 2){
             //$('#js-error-message').text(`Sorry, it looks like we didn't find any bikes or hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes and/or hikes. `)
+            spinner.setAttribute('hidden', ''); 
+            $('#activities-input').removeClass('js-hidden');
             $('.alert-activities').removeClass('js-hidden');
          }
          else{
@@ -211,8 +206,8 @@ function getBikes(radiusDay=20,length=0, hikingAlso,nightCheck){
                 
                     if(nightCheck === 'yes') {
                         getAllRestaurants();}    
-                }
-         } //end if check numberOfResults
+                }//end of ifelse for hikingAlso check
+         } //end if/else check numberOfResults
       })
       .catch(err => {
         $('#js-error-message').text(`Sorry, we may be out biking. Try again`)
@@ -237,6 +232,8 @@ function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
         let numberOfResults = responseJson.trails.length;
         if(numberOfResults < 2){
             //$('#js-error-message').text(`Sorry, it looks like we didn't find any hiking trails. Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck hikes. `)
+            spinner.setAttribute('hidden', ''); 
+            $('#activities-input').removeClass('js-hidden');
             $('.alert-activities').removeClass('js-hidden');
          }
          else {
@@ -248,7 +245,7 @@ function getHikes(radiusDay=20,length=0, bikeAlso,nightCheck){
             
             if(nightCheck==='yes')
             {getAllRestaurants();}
-        }//end of if for numberOfResults
+        }//end of ifelse for numberOfResults
       })
       .catch(err => {
         $('#js-error-message').text(`Sorry, we may be out hiking. Try again in a bit`)
@@ -451,15 +448,13 @@ function handleLearnMoreSubmit(){
     })
     $('#learnmore-location').on('click',function(){
         event.preventDefault();
-        displayIntro();
-        
+        displayIntro();       
     })
-    console.log(`handleLearnMoreSubmit ran`);
+    
 }
 
 function handleLearnMoreResults(){
     $('#learnmore-results').on('click',function(){
-        
         event.preventDefault();
         $('.main').removeClass('main-background-results')
         displayIntrowithResults();
