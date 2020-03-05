@@ -152,7 +152,7 @@ main{
     display:block;
 }
 
-section {          
+section, .start-screen {          
     padding: 20px;
     position: absolute;
     top:0px;
@@ -160,7 +160,6 @@ section {
     transition: 2s opacity;
     transition:2s left;
     margin:auto;
-    /*margin-top:-45px;*/
     width:96%;
 }
 
@@ -971,7 +970,7 @@ section{
 
 .start-screen {
     min-height: 0;
-    top: 400px;
+    top: 360px;
 }
 
 .header-start .title {

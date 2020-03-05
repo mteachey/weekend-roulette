@@ -4,8 +4,7 @@
         <title>Weekend Roulette</title>
         <meta name="viewport" content="width=device-width,initial-scale=1"> 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Bungee+Shade|Comfortaa|Limelight|Monoton|Rammetto+One|Righteous|Vast+Shadow&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Comfortaa|Marcellus|Noto+Serif+TC|Quattrocento|Squada+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
         <link rel="stylesheet" href="style/main.css">
     </head>
@@ -42,10 +41,10 @@
               
         
         </header> 
-        <section id="start-screen" class="start-screen">
+        <div id="start-screen" class="start-screen">
             <button id="start" class="start-button" type="submit">Let's Do This!</button>
             <button id="learnmore-intro" class="grey-button learnmore-button" type="submit">Learn More</button>
-        </section>
+        </div>
         
        
         <section id="location-input" class="transparent js-slide-in" >
@@ -62,8 +61,8 @@
                     <label for="state">State</label>
                     <select id="state" name="state" class="select-css" required>
                         <option value="" disabled selected>Find your state</option>
-                        <option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Guam">Guam</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Northern Marianas Islands">Northern Marianas Islands</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Puerto Rico">Puerto Rico</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Virgin Islands">Virgin Islands</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option></select>
-                    </select>				
+                        <option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Guam">Guam</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Northern Marianas Islands">Northern Marianas Islands</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Puerto Rico">Puerto Rico</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Virgin Islands">Virgin Islands</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option>
+                    </select>			
                     <!--input type="text" name="state" id="state" placeholder="CO" required--><br> 
                     <p class="note">Please be sure to spell your city name correctly and only search for US cities.</p>   
                 </fieldset>
@@ -71,7 +70,7 @@
                 <button type="submit">Get Your Coordinates!</button>
             </form>
             <button id="learnmore-location" class="grey-button learnmore-button" type="submit">Learn More</button>
-            <div hidden id="globe" class="loading-image"><img src="https://paintedskycreative.com/_external-images/weekend-roulette/world.gif"/></div>
+            <div hidden id="globe" class="loading-image"><img alt="spinning globe that appears while page is loading" src="https://paintedskycreative.com/_external-images/weekend-roulette/world.gif"/></div>
        </section>
        <div class="alert-activities  alert js-hidden">
         <span class="closebtn">&times;</span>
@@ -123,7 +122,7 @@
             <p id="js-error-message" class="error-message"></p>
         </section>
         <!-- this will show our spinner for the activities-->
-        <div hidden id="spinner" class="loading-image"><img src="https://paintedskycreative.com/_external-images/weekend-roulette/roulette-wheel-1.gif"/><!--img src="https://paintedskycreative.com/_external-images/weekend-roulette/rolling-dice-gif-3.gif"/--></div>
+        <div hidden id="spinner" class="loading-image"><img alt="spinning roulette wheel that appears while page is loading" src="https://paintedskycreative.com/_external-images/weekend-roulette/roulette-wheel-1.gif"/></div>
         
         <section class="results js-hidden">           
             <header class="results-header js-hidden">
