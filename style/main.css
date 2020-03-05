@@ -464,8 +464,7 @@ li.first-item{
 }
 
 .main-background-results h1{
-    text-shadow: 2px 2px #fff;
-    color: #1701b7;
+    color: #fff;
     font-size:2.25rem;
     width: 235px;  /*to keep the words on two lines*/
 }
