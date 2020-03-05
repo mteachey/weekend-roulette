@@ -670,7 +670,7 @@ li.first-item{
     -webkit-animation-duration: 10s;
     -webkit-animation-iteration-count: infinite;
     animation-name: change;
-    animation-duration: 0s;
+    animation-duration: 9s;
     animation-iteration-count: infinite;
 }
 
