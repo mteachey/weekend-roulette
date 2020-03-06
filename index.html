@@ -41,8 +41,8 @@
         
         </header> 
         <div id="start-screen" class="start-screen">
-            <button id="start" class="start-button" type="submit">Let's Do This!</button>
-            <button id="learnmore-intro" class="grey-button learnmore-button" type="submit">Learn More</button>
+            <button id="start" class="start-button" type="button">Let's Do This!</button>
+            <button id="learnmore-intro" class="grey-button learnmore-button" type="button">Learn More</button>
         </div>
               
         <section id="location-input" class="transparent js-slide-in" >
@@ -50,7 +50,7 @@
                 <span class="closebtn">&times;</span>
                 Please enter only letters.
               </div>
-            <p class="text-align-center">To get started, in the form below enter the city and state you would like to find activities around.</p>     
+            <p class="text-align-center">To get started, in the form below enter the city and state you would like to find activities around.</p>  
             <form id="latLong-form" >
                 <fieldset name="location">
                     <legend>Find Your Latitude and Longitude</legend>
@@ -67,17 +67,31 @@
                         
                 <button type="submit">Get Your Coordinates!</button>
             </form>
-            <button id="learnmore-location" class="grey-button learnmore-button" type="submit">Learn More</button>
+            <button id="learnmore-location" class="grey-button learnmore-button" type="button">Learn More</button>
             <div hidden id="globe" class="loading-image"><img alt="spinning globe that appears while page is loading" src="https://paintedskycreative.com/_external-images/weekend-roulette/world.gif"/></div>
        </section>
-       <div class="alert-activities  alert js-hidden">
-        <span class="closebtn">&times;</span>
-        <p>Sorry, it looks like we didn't find any bikes or hiking trails.</p><p>Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes and/or hikes. <p>You can also double check the city name - for example, we can find 'Alameda Island, CA' but not 'Alameda, CA' - we aren't as fancy as Google yet!.</p>
+       <div class="error-activities-day  alert js-hidden">
+            <span class="closebtn">&times;</span>
+            <p>Sorry, we maybe out hiking. Please try again.</p>
+        </div>  
+        <div class="error-activities-night  alert js-hidden">
+            <span class="closebtn">&times;</span>
+            <p>Sorry, we maybe out eating some delicious food. Please try again later to get your restaurants.</p>
+        </div>  
+        <div class="error-location  alert js-hidden">
+            <span class="closebtn">&times;</span>
+            <p>Sorry, something went wrong finding your location. Check your spelling and try again.</p>
+        </div>  
+        <div class="alert-activities  alert js-hidden">
+            <span class="closebtn">&times;</span>
+            <p>Sorry, it looks like we didn't find any bikes or hiking trails.</p><p>Try increasing your radius or changing your Minimum Length. Otherwise, you may have to uncheck bikes and/or hikes. <p>You can also double check the city name - for example, we can find 'Alameda Island, CA' but not 'Alameda, CA' - we aren't as fancy as Google yet!.</p>
         </div>
+        
        <section id="activities-input" class="transparent">
             <h2>Let's Get You Something To Do!</h2>
             <div class="location-result"></div>
-            <button id="reset-location-button" class="grey-button" type="submit" >Search New Location</button>
+            <button id="reset-location-button" class="grey-button" type="button" >Search New Location</button>
+            <p id="js-error-message" class="error-message error-message-activity js-hidden"></p>
             <form id="event-form">
                 <fieldset name="day-activities" class="field-set-with-checkboxes">
                     <legend>Day Activities</legend>
@@ -116,8 +130,8 @@
                 <button type="submit" >Spin the Wheel</button>
                 <p class="note">Sometimes, I need a little extra time to find your best restaurant selections.</p>
             </form>
-            <button id="learnmore-activities" class="grey-button" type="submit">Learn More</button>
-            <p id="js-error-message" class="error-message"></p>
+            <button id="learnmore-activities" class="grey-button" type="button">Learn More</button>
+           
         </section>
         <!-- this will show our spinner for the activities-->
         <div hidden id="spinner" class="loading-image"><img alt="spinning roulette wheel that appears while page is loading" src="https://paintedskycreative.com/_external-images/weekend-roulette/roulette-wheel-1.gif"/></div>
@@ -128,15 +142,15 @@
             </header>
             <div class="results-day js-hidden"></div>
             <div class="results-night js-hidden"></div>
-            <button id="roll-again" class="white-button" type="submit">Spin Again</button>
-            <button id="learnmore-results" class="grey-button" type="submit">Learn More</button>
+            <button id="roll-again" class="white-button" type="button">Spin Again</button>
+            <button id="learnmore-results" class="grey-button" type="button">Learn More</button>
         </section>
         <section id="intro" class="js-hidden">
             <p class="intro-text">This app takes the deciding out of your play day - weekend, travel, or just playing hooky.  After providing us with your location, you will "spin the wheel", then given your activities for the day and evening.</p>
 
             <p class="intro-text">Because we still want to give you some choice (if you want it), you will be provided with two day time activities and two evening ones. At this time, the day time activities will be either a hiking trail, mountain biking trail or one of each and the evening activities will be two restaurants.</p><p class="intro-text">Check back for version 2 with more activity types and better search features!</p> 
-            <button id="start-intro" class="start-button" type="submit">Let's Do This!</button>
-            <button id="remove-intro" class="grey-button" type="submit">Ok-I got it.</button>
+            <button id="start-intro" class="start-button" type="button">Let's Do This!</button>
+            <button id="remove-intro" class="grey-button" type="button">Ok-I got it.</button>
         </section>
         </main>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
