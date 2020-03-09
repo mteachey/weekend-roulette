@@ -1,6 +1,6 @@
 Weekend Roulette v1
 
-Overview — This repo contains the files for an app that allows users to leave the weekend decision making to the app.  The app will provide 2 day activities and 2 evening ones with the 'spin of a wheel' (click of a button). The app can best be viewed at https://mteachey.github.io/weekend-roulette
+Overview — This repo contains the files for an app that allows users to leave the weekend decision making to the app.  The app provides 2 day activities and 2 evening ones with the 'spin of a wheel' (click of a button). The app can best be viewed at https://mteachey.github.io/weekend-roulette
 
 Screenshots
 
